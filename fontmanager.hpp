@@ -14,7 +14,46 @@
 #pragma once
 
 #include <Arduino.h>
-#include "M5Dial.h"
+
+/**
+ * @interface DeviceInterface
+ * @brief Abstract interface for device-specific display operations
+ *
+ * This interface allows the FontDisplayManager to work with different devices
+ * without being tightly coupled to any specific hardware implementation.
+ */
+class DeviceInterface
+{
+public:
+    virtual ~DeviceInterface() = default;
+
+    /**
+     * @brief Clear the display
+     */
+    virtual void clearDisplay() = 0;
+
+    /**
+     * @brief Get display width
+     * @return Display width in pixels
+     */
+    virtual int getDisplayWidth() const = 0;
+
+    /**
+     * @brief Get display height
+     * @return Display height in pixels
+     */
+    virtual int getDisplayHeight() const = 0;
+
+    /**
+     * @brief Display font information and sample text
+     * @param familyName Font family name
+     * @param fontName Font name
+     * @param fontSize Font size
+     * @param sampleText Sample text to display
+     */
+    virtual void displayFont(const String &familyName, const String &fontName,
+                             int fontSize, const char *sampleText) = 0;
+};
 
 // Arduino-compatible font definitions
 struct FontInfo
@@ -43,6 +82,7 @@ private:
     int lastEncoderPosition; // Last recorded encoder position
     const char *sampleText;  // Sample text to display
     bool displayChanged;     // Flag to track if display needs update
+    DeviceInterface *device; // Pointer to device-specific implementation
 
     int getFontsInFamily(int familyIndex) const;
     String getFamilyName(int familyIndex) const;
@@ -62,8 +102,15 @@ private:
 public:
     /**
      * @brief Constructor
+     * @param deviceInterface Pointer to device-specific implementation
      */
-    FontDisplayManager();
+    FontDisplayManager(DeviceInterface *deviceInterface = nullptr);
+
+    /**
+     * @brief Set device interface
+     * @param deviceInterface Pointer to device-specific implementation
+     */
+    void setDevice(DeviceInterface *deviceInterface);
 
     /**
      * @brief Set sample text to display

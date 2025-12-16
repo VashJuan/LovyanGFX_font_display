@@ -18,26 +18,22 @@
 #include "M5Dial.h"
 #include "encoder.hpp"
 #include "fontmanager.hpp"
+#include "m5dial.hpp"
 
 void setup()
 {
-    auto cfg = M5.config();
-    M5Dial.begin(cfg, true, false);
     Serial.begin(115200);
-
     Serial.println("Font Display starting...");
 
-    M5Dial.Display.fillScreen(BLACK);
-    M5Dial.Display.setTextColor(GREEN);
-    M5Dial.Display.setTextDatum(middle_center);
-    M5Dial.Display.setTextSize(1);
-
-    M5Dial.Display.drawString("M5 Dial Font Display v 1.0", M5Dial.Display.width() / 2, M5Dial.Display.height() / 2 + 15);
+    // Initialize M5Dial device
+    m5dialDevice.begin();
+    m5dialDevice.showStartupMessage("M5 Dial Font Display v 1.0");
     delay(750);
 
     encoder.setup();
 
-    // Initialize font manager with sample text
+    // Initialize font manager with device interface and sample text
+    fontManager.setDevice(&m5dialDevice);
     fontManager.setSampleText("Hello World!");
 
     Serial.println("Setup done.");

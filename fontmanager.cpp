@@ -76,13 +76,20 @@ const FontInfo fontFamilies[][20] = {
 const int NUM_FONT_FAMILIES = 5;
 
 // Constructor implementation
-FontDisplayManager::FontDisplayManager() : 
+FontDisplayManager::FontDisplayManager(DeviceInterface* deviceInterface) : 
     currentFamilyIndex(0), 
     currentFontIndex(0), 
     lastEncoderPosition(-999), 
     sampleText("Sample Text 123"),
-    displayChanged(true)
+    displayChanged(true),
+    device(deviceInterface)
 {
+}
+
+void FontDisplayManager::setDevice(DeviceInterface* deviceInterface)
+{
+    device = deviceInterface;
+    displayChanged = true;
 }
 
 // Private method implementations
@@ -184,135 +191,22 @@ void FontDisplayManager::update(long encoderPosition)
 
 void FontDisplayManager::displayCurrentFont()
 {
-    M5Dial.Display.fillScreen(BLACK);
-    M5Dial.Display.setTextColor(GREEN);
-    M5Dial.Display.setTextDatum(top_left);
-    M5Dial.Display.setTextSize(1);
-
-    const int center_x = M5Dial.Display.width() / 2;
-
-    // Display family name at top - use built-in font for info display
-    M5Dial.Display.setFont(&fonts::Font2);
-    String familyName = "Family: " + getFamilyName(currentFamilyIndex);
-    M5Dial.Display.drawString(familyName, center_x - (M5Dial.Display.textWidth(familyName) / 2), 15);
-
-    // Display font name
-    String fontName = "Font: " + getFontName(currentFamilyIndex, currentFontIndex);
-    M5Dial.Display.drawString(fontName, center_x - (M5Dial.Display.textWidth(fontName) / 2), 30);
-
-    // Display font size
-    if (currentFamilyIndex >= 0 && currentFamilyIndex < NUM_FONT_FAMILIES &&
-        currentFontIndex >= 0 && currentFontIndex < getFontsInFamily(currentFamilyIndex)) {
-        String fontSize = "Size: " + String(fontFamilies[currentFamilyIndex][currentFontIndex].size);
-        M5Dial.Display.drawString(fontSize, center_x - (M5Dial.Display.textWidth(fontSize) / 2), 45);
+    if (device == nullptr) {
+        return; // Cannot display without a device
     }
-
-    // Display sample text with the current font
-    displaySampleText();
-
-    // Display navigation info at bottom
-    M5Dial.Display.setFont(&fonts::Font2);
-    M5Dial.Display.setTextColor(YELLOW);
-    M5Dial.Display.setTextDatum(bottom_center);
-    M5Dial.Display.drawString("Turn encoder: change font", M5Dial.Display.width() / 2, M5Dial.Display.height() - 40);
-    M5Dial.Display.drawString("Press button: change text", M5Dial.Display.width() / 2, M5Dial.Display.height() - 25);
+    
+    String familyName = getFamilyName(currentFamilyIndex);
+    String fontName = getFontName(currentFamilyIndex, currentFontIndex);
+    int fontSize = getCurrentFontSize();
+    
+    device->displayFont(familyName, fontName, fontSize, sampleText);
 }
 
 void FontDisplayManager::displaySampleText()
 {
-    // Set appropriate font based on current selection
-    if (currentFamilyIndex >= 0 && currentFamilyIndex < NUM_FONT_FAMILIES &&
-        currentFontIndex >= 0 && currentFontIndex < getFontsInFamily(currentFamilyIndex)) {
-        
-        const FontInfo& currentFont = fontFamilies[currentFamilyIndex][currentFontIndex];
-        
-        M5Dial.Display.setTextColor(WHITE);
-        M5Dial.Display.setTextDatum(middle_center);
-        
-        String fontName = String(currentFont.name);
-        
-        if (fontName.indexOf("FreeMono") >= 0) {
-            if (fontName.indexOf("24pt") >= 0) {
-                M5Dial.Display.setFont(&fonts::FreeMono24pt7b);
-            } else if (fontName.indexOf("18pt") >= 0) {
-                M5Dial.Display.setFont(&fonts::FreeMono18pt7b);
-            } else if (fontName.indexOf("12pt") >= 0) {
-                M5Dial.Display.setFont(&fonts::FreeMono12pt7b);
-            } else {
-                M5Dial.Display.setFont(&fonts::FreeMono9pt7b);
-            }
-        } else if (fontName.indexOf("FreeSans") >= 0) {
-            if (fontName.indexOf("24pt") >= 0) {
-                M5Dial.Display.setFont(&fonts::FreeSans24pt7b);
-            } else if (fontName.indexOf("18pt") >= 0) {
-                M5Dial.Display.setFont(&fonts::FreeSans18pt7b);
-            } else if (fontName.indexOf("12pt") >= 0) {
-                M5Dial.Display.setFont(&fonts::FreeSans12pt7b);
-            } else {
-                M5Dial.Display.setFont(&fonts::FreeSans9pt7b);
-            }
-        } else if (fontName.indexOf("FreeSerif") >= 0) {
-            if (fontName.indexOf("24pt") >= 0) {
-                M5Dial.Display.setFont(&fonts::FreeSerif24pt7b);
-            } else if (fontName.indexOf("18pt") >= 0) {
-                M5Dial.Display.setFont(&fonts::FreeSerif18pt7b);
-            } else if (fontName.indexOf("12pt") >= 0) {
-                M5Dial.Display.setFont(&fonts::FreeSerif12pt7b);
-            } else {
-                M5Dial.Display.setFont(&fonts::FreeSerif9pt7b);
-            }
-        } else if (fontName.indexOf("Orbitron") >= 0) {
-            M5Dial.Display.setFont(&fonts::Orbitron_Light_24);
-        } else if (fontName.indexOf("Roboto") >= 0) {
-            M5Dial.Display.setFont(&fonts::Roboto_Thin_24);
-        } else if (fontName.indexOf("DejaVu") >= 0) {
-            if (fontName.indexOf("24") >= 0) {
-                M5Dial.Display.setFont(&fonts::DejaVu24);
-            } else if (fontName.indexOf("18") >= 0) {
-                M5Dial.Display.setFont(&fonts::DejaVu18);
-            } else {
-                M5Dial.Display.setFont(&fonts::DejaVu12);
-            }
-        } else {
-            // Default to built-in fonts for lgfx_fonts family
-            if (fontName.indexOf("Font8") >= 0) {
-                M5Dial.Display.setFont(&fonts::Font8);
-            } else if (fontName.indexOf("Font7") >= 0) {
-                M5Dial.Display.setFont(&fonts::Font7);
-            } else if (fontName.indexOf("Font6") >= 0) {
-                M5Dial.Display.setFont(&fonts::Font6);
-            } else if (fontName.indexOf("Font4") >= 0) {
-                M5Dial.Display.setFont(&fonts::Font4);
-            } else if (fontName.indexOf("Font2") >= 0) {
-                M5Dial.Display.setFont(&fonts::Font2);
-            } else {
-                M5Dial.Display.setFont(&fonts::Font0);
-            }
-        }
-        
-        // Display the sample text in the center area
-        int centerX = M5Dial.Display.width() / 2;
-        int centerY = M5Dial.Display.height() / 2;
-
-        // if wider then the display, insert carriage returns
-        int textWidth = M5Dial.Display.textWidth(sampleText);
-        if (textWidth > M5Dial.Display.width() - 20) {
-            String modifiedText;
-            int lineWidth = 0;
-            for (unsigned int i = 0; i < sampleText.length(); i++) {
-                char c = sampleText.charAt(i);
-                lineWidth += M5Dial.Display.textWidth(String(c));
-                if (lineWidth > M5Dial.Display.width() - 20 && c == ' ') {
-                    modifiedText += '\n';
-                    lineWidth = 0;
-                } else {
-                    modifiedText += c;
-                }
-            }
-            sampleText = modifiedText;
-        }
-        M5Dial.Display.drawString(sampleText, centerX, centerY);
-    }
+    // This method is now handled by the device interface
+    // The actual font rendering and text display is delegated to the device
+    displayCurrentFont();
 }
 
 String FontDisplayManager::getCurrentFamilyName() const
