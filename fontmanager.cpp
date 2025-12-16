@@ -204,12 +204,7 @@ void FontDisplayManager::displayCurrentFont()
     device->displayFont(familyName, fontName, fontSize, fontPtr, sampleText);
 }
 
-void FontDisplayManager::displaySampleText()
-{
-    // This method is now handled by the device interface
-    // The actual font rendering and text display is delegated to the device
-    displayCurrentFont();
-}
+
 
 String FontDisplayManager::getCurrentFamilyName() const
 {
@@ -226,20 +221,11 @@ int FontDisplayManager::getTotalFamilies() const
     return NUM_FONT_FAMILIES;
 }
 
-int FontDisplayManager::getFontsInCurrentFamily() const
-{
-    return getFontsInFamily(currentFamilyIndex);
-}
 
-int FontDisplayManager::getCurrentFamilyIndex() const
-{
-    return currentFamilyIndex;
-}
 
-int FontDisplayManager::getCurrentFontIndex() const
-{
-    return currentFontIndex;
-}
+
+
+
 
 void FontDisplayManager::forceUpdate()
 {
@@ -264,33 +250,9 @@ const lgfx::IFont* FontDisplayManager::getCurrentFontPtr() const
     return nullptr;
 }
 
-int FontDisplayManager::getTotalFonts() const
-{
-    int totalFonts = 0;
-    for (int i = 0; i < NUM_FONT_FAMILIES; i++) {
-        totalFonts += getFontsInFamily(i);
-    }
-    return totalFonts;
-}
 
-const FontInfo* FontDisplayManager::getFontByAbsoluteIndex(int absoluteIndex) const
-{
-    if (absoluteIndex < 0) {
-        return nullptr;
-    }
-    
-    int currentPos = 0;
-    for (int familyIdx = 0; familyIdx < NUM_FONT_FAMILIES; familyIdx++) {
-        int fontsInThisFamily = getFontsInFamily(familyIdx);
-        if (absoluteIndex < currentPos + fontsInThisFamily) {
-            int fontIdx = absoluteIndex - currentPos;
-            return &fontFamilies[familyIdx][fontIdx];
-        }
-        currentPos += fontsInThisFamily;
-    }
-    
-    return nullptr;
-}
+
+
 
 // Global instance for easy access
 FontDisplayManager fontManager;

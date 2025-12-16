@@ -114,10 +114,7 @@ void M5DialDevice::displayFont(const String& familyName, const String& fontName,
     M5Dial.Display.drawString("Press button: change text", getDisplayWidth() / 2, getDisplayHeight() - 25);
 }
 
-bool M5DialDevice::wasButtonPressed()
-{
-    return M5Dial.BtnA.wasPressed();
-}
+
 
 void M5DialDevice::update()
 {

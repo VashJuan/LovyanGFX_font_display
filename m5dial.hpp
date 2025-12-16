@@ -71,12 +71,6 @@ public:
                      int fontSize, const lgfx::IFont *fontPtr, const char *sampleText) override;
 
     /**
-     * @brief Check if button was pressed
-     * @return true if button was pressed
-     */
-    bool wasButtonPressed();
-
-    /**
      * @brief Update device state
      */
     void update();

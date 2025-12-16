@@ -94,16 +94,6 @@ private:
     String getFontName(int familyIndex, int fontIndex) const;
     void mapEncoderToFont(long encoderPosition);
 
-    // https://en.wikipedia.org/wiki/Pangram
-    const char *pangrams[7] = {
-        "Pack my box with five dozen liquor jugs",
-        "The quick brown fox jumps over the lazy dog",
-        "Glib jocks quiz nymph to vex dwarf.",
-        "Sphinx of black quartz, judge my vow.",
-        "How vexingly quick daft zebras jump!",
-        "The five boxing wizards jump quickly.",
-        "Jackdaws love my big sphinx of quartz."};
-
 public:
     /**
      * @brief Constructor
@@ -135,11 +125,6 @@ public:
     void displayCurrentFont();
 
     /**
-     * @brief Display sample text using current font
-     */
-    void displaySampleText();
-
-    /**
      * @brief Get current font family name
      * @return Current font family name
      */
@@ -158,24 +143,6 @@ public:
     int getTotalFamilies() const;
 
     /**
-     * @brief Get total number of fonts in current family
-     * @return Number of fonts in current family
-     */
-    int getFontsInCurrentFamily() const;
-
-    /**
-     * @brief Get current font family index
-     * @return Current font family index
-     */
-    int getCurrentFamilyIndex() const;
-
-    /**
-     * @brief Get current font index within family
-     * @return Current font index
-     */
-    int getCurrentFontIndex() const;
-
-    /**
      * @brief Get font size of current font
      * @return Font size
      */
@@ -191,19 +158,6 @@ public:
      * @return Pointer to current font object
      */
     const lgfx::IFont *getCurrentFontPtr() const;
-
-    /**
-     * @brief Get total number of fonts across all families
-     * @return Total font count
-     */
-    int getTotalFonts() const;
-
-    /**
-     * @brief Get font info by absolute index
-     * @param absoluteIndex Index across all fonts
-     * @return Pointer to FontInfo or nullptr if invalid
-     */
-    const FontInfo *getFontByAbsoluteIndex(int absoluteIndex) const;
 };
 
 // Global instance declaration

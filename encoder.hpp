@@ -47,40 +47,16 @@ public:
     void setup();
 
     /**
-     * @brief Update encoder state
-     * Handles encoder reading, button presses, and display updates
-     * Should be called in the main loop
-     */
-    void update();
-
-    /**
      * @brief Get current encoder position
      * @return Current encoder position value
      */
     long getPosition();
 
     /**
-     * @brief Set encoder position
-     * @param position New position value to set
-     */
-    void setPosition(long position);
-
-    /**
-     * @brief Reset encoder position to a specified value
-     */
-    void resetPosition(int position = 100);
-
-    /**
      * @brief Check if encoder position has changed
      * @return true if position changed since last check
      */
     bool hasPositionChanged();
-
-    /**
-     * @brief Get the old (previous) position
-     * @return Previous encoder position
-     */
-    long getOldPosition() const;
 };
 
 // Global instance for easy access
