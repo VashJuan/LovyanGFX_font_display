@@ -211,7 +211,7 @@ void FontDisplayManager::displayCurrentFont()
     displaySampleText();
 
     // Display navigation info at bottom
-    M5Dial.Display.setFont(&fonts::Font3);
+    M5Dial.Display.setFont(&fonts::Font2);
     M5Dial.Display.setTextColor(YELLOW);
     M5Dial.Display.setTextDatum(bottom_center);
     M5Dial.Display.drawString("Turn encoder: change font", M5Dial.Display.width() / 2, M5Dial.Display.height() - 40);
@@ -292,7 +292,25 @@ void FontDisplayManager::displaySampleText()
         
         // Display the sample text in the center area
         int centerX = M5Dial.Display.width() / 2;
-        int centerY = M5Dial.Display.height() / 2 + 10;
+        int centerY = M5Dial.Display.height() / 2;
+
+        // if wider then the display, insert carriage returns
+        int textWidth = M5Dial.Display.textWidth(sampleText);
+        if (textWidth > M5Dial.Display.width() - 20) {
+            String modifiedText;
+            int lineWidth = 0;
+            for (unsigned int i = 0; i < sampleText.length(); i++) {
+                char c = sampleText.charAt(i);
+                lineWidth += M5Dial.Display.textWidth(String(c));
+                if (lineWidth > M5Dial.Display.width() - 20 && c == ' ') {
+                    modifiedText += '\n';
+                    lineWidth = 0;
+                } else {
+                    modifiedText += c;
+                }
+            }
+            sampleText = modifiedText;
+        }
         M5Dial.Display.drawString(sampleText, centerX, centerY);
     }
 }

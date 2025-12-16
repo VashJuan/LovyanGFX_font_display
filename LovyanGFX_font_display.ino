@@ -68,24 +68,25 @@ void loop()
     if (M5Dial.BtnA.wasPressed())
     {
         static int textIndex = 0;
+
         const char *sampleTexts[] = {
             "Hello World!",
             "Font Demo",
             "M5Dial",
             "12345",
-            "ABC abc"};
+            "ABC abc",
+            // https://en.wikipedia.org/wiki/Pangram
+            "Pack my box with five dozen liquor jugs",
+            "The quick brown fox jumps over the lazy dog",
+            "Glib jocks quiz nymph to vex dwarf.",
+            "Sphinx of black quartz, judge my vow.",
+            "How vexingly quick daft zebras jump!",
+            "The five boxing wizards jump quickly.",
+            "Jackdaws love my big sphinx of quartz."};
 
-        textIndex = (textIndex + 1) % 5;
+        textIndex = (textIndex + 1) % 12;
         fontManager.setSampleText(sampleTexts[textIndex]);
         fontManager.forceUpdate();
-
-        // TODO: Cycle through pangrams
-        /*
-            static int pangramIndex = 0;
-            fontManager.setSampleText(fontManager.pangrams[pangramIndex]);
-            pangramIndex = (pangramIndex + 1) % 7;
-            fontManager.forceUpdate();
-            */
 
         Serial.println("Sample text changed to: " + String(sampleTexts[textIndex]));
     }
