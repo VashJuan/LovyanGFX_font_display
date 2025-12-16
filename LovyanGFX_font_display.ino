@@ -1,5 +1,5 @@
 /**
- * @file font_display.ino
+ * @file LovyanGFX_font_display.ino
  * @url https://github.com/vashjuan/M5Dial_font_display
  * @author John Cornelison (john@vashonSoftware.com)
  * @brief Display all LovyanGFX fonts, (on M5Dial) using an encoder to scroll through them.
