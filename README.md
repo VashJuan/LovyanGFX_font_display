@@ -5,10 +5,10 @@ using the rotary encoder.
 
 ## Description
 
-This Arduino project demonstrates the different fonts available in LovyanGFX by
-displaying them on an M5Dial device. Users can rotate the encoder to cycle
-through different font families and fonts, with sample text displayed in each
-selected font.
+This Arduino project demonstrates the access to over 100 different font variants
+across 12 families available in LovyanGFX by displaying them on an M5Dial
+device. Users can rotate the encoder to cycle through different font families
+and fonts, with sample text displayed in each selected font.
 
 ## Features
 

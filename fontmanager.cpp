@@ -24,6 +24,7 @@ const FontInfo fontFamilies[][20] = {
         {"lgfx_fonts", "Font6", 6, &fonts::Font6},
         {"lgfx_fonts", "Font7", 7, &fonts::Font7},
         {"lgfx_fonts", "Font8", 8, &fonts::Font8},
+        {"lgfx_fonts", "TomThumb", 0, &fonts::TomThumb},
         {nullptr, nullptr, 0, nullptr} // End marker
     },
     // Free Mono family
@@ -36,6 +37,14 @@ const FontInfo fontFamilies[][20] = {
         {"Free Mono", "FreeMonoBold12pt7b", 12, &fonts::FreeMonoBold12pt7b},
         {"Free Mono", "FreeMonoBold18pt7b", 18, &fonts::FreeMonoBold18pt7b},
         {"Free Mono", "FreeMonoBold24pt7b", 24, &fonts::FreeMonoBold24pt7b},
+        {"Free Mono", "FreeMonoOblique9pt7b", 9, &fonts::FreeMonoOblique9pt7b},
+        {"Free Mono", "FreeMonoOblique12pt7b", 12, &fonts::FreeMonoOblique12pt7b},
+        {"Free Mono", "FreeMonoOblique18pt7b", 18, &fonts::FreeMonoOblique18pt7b},
+        {"Free Mono", "FreeMonoOblique24pt7b", 24, &fonts::FreeMonoOblique24pt7b},
+        {"Free Mono", "FreeMonoBoldOblique9pt7b", 9, &fonts::FreeMonoBoldOblique9pt7b},
+        {"Free Mono", "FreeMonoBoldOblique12pt7b", 12, &fonts::FreeMonoBoldOblique12pt7b},
+        {"Free Mono", "FreeMonoBoldOblique18pt7b", 18, &fonts::FreeMonoBoldOblique18pt7b},
+        {"Free Mono", "FreeMonoBoldOblique24pt7b", 24, &fonts::FreeMonoBoldOblique24pt7b},
         {nullptr, nullptr, 0, nullptr} // End marker
     },
     // Free Sans family
@@ -48,6 +57,14 @@ const FontInfo fontFamilies[][20] = {
         {"Free Sans", "FreeSansBold12pt7b", 12, &fonts::FreeSansBold12pt7b},
         {"Free Sans", "FreeSansBold18pt7b", 18, &fonts::FreeSansBold18pt7b},
         {"Free Sans", "FreeSansBold24pt7b", 24, &fonts::FreeSansBold24pt7b},
+        {"Free Sans", "FreeSansOblique9pt7b", 9, &fonts::FreeSansOblique9pt7b},
+        {"Free Sans", "FreeSansOblique12pt7b", 12, &fonts::FreeSansOblique12pt7b},
+        {"Free Sans", "FreeSansOblique18pt7b", 18, &fonts::FreeSansOblique18pt7b},
+        {"Free Sans", "FreeSansOblique24pt7b", 24, &fonts::FreeSansOblique24pt7b},
+        {"Free Sans", "FreeSansBoldOblique9pt7b", 9, &fonts::FreeSansBoldOblique9pt7b},
+        {"Free Sans", "FreeSansBoldOblique12pt7b", 12, &fonts::FreeSansBoldOblique12pt7b},
+        {"Free Sans", "FreeSansBoldOblique18pt7b", 18, &fonts::FreeSansBoldOblique18pt7b},
+        {"Free Sans", "FreeSansBoldOblique24pt7b", 24, &fonts::FreeSansBoldOblique24pt7b},
         {nullptr, nullptr, 0, nullptr} // End marker
     },
     // Free Serif family
@@ -56,25 +73,95 @@ const FontInfo fontFamilies[][20] = {
         {"Free Serif", "FreeSerif12pt7b", 12, &fonts::FreeSerif12pt7b},
         {"Free Serif", "FreeSerif18pt7b", 18, &fonts::FreeSerif18pt7b},
         {"Free Serif", "FreeSerif24pt7b", 24, &fonts::FreeSerif24pt7b},
+        {"Free Serif", "FreeSerifItalic9pt7b", 9, &fonts::FreeSerifItalic9pt7b},
+        {"Free Serif", "FreeSerifItalic12pt7b", 12, &fonts::FreeSerifItalic12pt7b},
+        {"Free Serif", "FreeSerifItalic18pt7b", 18, &fonts::FreeSerifItalic18pt7b},
+        {"Free Serif", "FreeSerifItalic24pt7b", 24, &fonts::FreeSerifItalic24pt7b},
         {"Free Serif", "FreeSerifBold9pt7b", 9, &fonts::FreeSerifBold9pt7b},
         {"Free Serif", "FreeSerifBold12pt7b", 12, &fonts::FreeSerifBold12pt7b},
         {"Free Serif", "FreeSerifBold18pt7b", 18, &fonts::FreeSerifBold18pt7b},
         {"Free Serif", "FreeSerifBold24pt7b", 24, &fonts::FreeSerifBold24pt7b},
+        {"Free Serif", "FreeSerifBoldItalic9pt7b", 9, &fonts::FreeSerifBoldItalic9pt7b},
+        {"Free Serif", "FreeSerifBoldItalic12pt7b", 12, &fonts::FreeSerifBoldItalic12pt7b},
+        {"Free Serif", "FreeSerifBoldItalic18pt7b", 18, &fonts::FreeSerifBoldItalic18pt7b},
+        {"Free Serif", "FreeSerifBoldItalic24pt7b", 24, &fonts::FreeSerifBoldItalic24pt7b},
         {nullptr, nullptr, 0, nullptr} // End marker
     },
-    // Special fonts
+    // Orbitron family
     {
         {"Orbitron", "Orbitron_Light_24", 24, &fonts::Orbitron_Light_24},
+        {"Orbitron", "Orbitron_Light_32", 32, &fonts::Orbitron_Light_32},
         {"Orbitron", "Orbitron_Medium_24", 24, &fonts::Orbitron_Medium_20},
+        {"Orbitron", "Orbitron_Medium_32", 32, &fonts::Orbitron_Medium_32},
+        {nullptr, nullptr, 0, nullptr} // End marker
+    },
+    // Roboto and other decorative fonts
+    {
         {"Roboto", "Roboto_Thin_24", 24, &fonts::Roboto_Thin_24},
+        {"Satisfy", "Satisfy_24", 24, &fonts::Satisfy_24},
+        {"Yellowtail", "Yellowtail_32", 32, &fonts::Yellowtail_32},
+        {nullptr, nullptr, 0, nullptr} // End marker
+    },
+    // DejaVu family
+    {
+        {"DejaVu", "DejaVu9", 9, &fonts::DejaVu9},
         {"DejaVu", "DejaVu12", 12, &fonts::DejaVu12},
         {"DejaVu", "DejaVu18", 18, &fonts::DejaVu18},
         {"DejaVu", "DejaVu24", 24, &fonts::DejaVu24},
+        {"DejaVu", "DejaVu40", 40, &fonts::DejaVu40},
+        {"DejaVu", "DejaVu56", 56, &fonts::DejaVu56},
+        {"DejaVu", "DejaVu72", 72, &fonts::DejaVu72},
+        {nullptr, nullptr, 0, nullptr} // End marker
+    },
+    // Japanese Mincho family
+    {
+        {"JapanMincho", "lgfxJapanMincho_8", 8, &fonts::lgfxJapanMincho_8},
+        {"JapanMincho", "lgfxJapanMincho_12", 12, &fonts::lgfxJapanMincho_12},
+        {"JapanMincho", "lgfxJapanMincho_16", 16, &fonts::lgfxJapanMincho_16},
+        {"JapanMincho", "lgfxJapanMincho_20", 20, &fonts::lgfxJapanMincho_20},
+        {"JapanMincho", "lgfxJapanMincho_24", 24, &fonts::lgfxJapanMincho_24},
+        {"JapanMincho", "lgfxJapanMinchoP_8", 8, &fonts::lgfxJapanMinchoP_8},
+        {"JapanMincho", "lgfxJapanMinchoP_12", 12, &fonts::lgfxJapanMinchoP_12},
+        {"JapanMincho", "lgfxJapanMinchoP_16", 16, &fonts::lgfxJapanMinchoP_16},
+        {"JapanMincho", "lgfxJapanMinchoP_20", 20, &fonts::lgfxJapanMinchoP_20},
+        {"JapanMincho", "lgfxJapanMinchoP_24", 24, &fonts::lgfxJapanMinchoP_24},
+        {nullptr, nullptr, 0, nullptr} // End marker
+    },
+    // Japanese Gothic family
+    {
+        {"JapanGothic", "lgfxJapanGothic_8", 8, &fonts::lgfxJapanGothic_8},
+        {"JapanGothic", "lgfxJapanGothic_12", 12, &fonts::lgfxJapanGothic_12},
+        {"JapanGothic", "lgfxJapanGothic_16", 16, &fonts::lgfxJapanGothic_16},
+        {"JapanGothic", "lgfxJapanGothic_20", 20, &fonts::lgfxJapanGothic_20},
+        {"JapanGothic", "lgfxJapanGothic_24", 24, &fonts::lgfxJapanGothic_24},
+        {"JapanGothic", "lgfxJapanGothicP_8", 8, &fonts::lgfxJapanGothicP_8},
+        {"JapanGothic", "lgfxJapanGothicP_12", 12, &fonts::lgfxJapanGothicP_12},
+        {"JapanGothic", "lgfxJapanGothicP_16", 16, &fonts::lgfxJapanGothicP_16},
+        {"JapanGothic", "lgfxJapanGothicP_20", 20, &fonts::lgfxJapanGothicP_20},
+        {"JapanGothic", "lgfxJapanGothicP_24", 24, &fonts::lgfxJapanGothicP_24},
+        {nullptr, nullptr, 0, nullptr} // End marker
+    },
+    // eFontCN family (Chinese)
+    {
+        {"eFontCN", "efontCN_10", 10, &fonts::efontCN_10},
+        {"eFontCN", "efontCN_12", 12, &fonts::efontCN_12},
+        {"eFontCN", "efontCN_14", 14, &fonts::efontCN_14},
+        {"eFontCN", "efontCN_16", 16, &fonts::efontCN_16},
+        {"eFontCN", "efontCN_24", 24, &fonts::efontCN_24},
+        {nullptr, nullptr, 0, nullptr} // End marker
+    },
+    // eFontJA family (Japanese)
+    {
+        {"eFontJA", "efontJA_10", 10, &fonts::efontJA_10},
+        {"eFontJA", "efontJA_12", 12, &fonts::efontJA_12},
+        {"eFontJA", "efontJA_14", 14, &fonts::efontJA_14},
+        {"eFontJA", "efontJA_16", 16, &fonts::efontJA_16},
+        {"eFontJA", "efontJA_24", 24, &fonts::efontJA_24},
         {nullptr, nullptr, 0, nullptr} // End marker
     }
 };
 
-const int NUM_FONT_FAMILIES = 5;
+const int NUM_FONT_FAMILIES = 12;
 
 // Constructor implementation
 FontDisplayManager::FontDisplayManager(DeviceInterface* deviceInterface) : 
@@ -205,7 +292,6 @@ void FontDisplayManager::displayCurrentFont()
 }
 
 
-
 String FontDisplayManager::getCurrentFamilyName() const
 {
     return getFamilyName(currentFamilyIndex);
@@ -220,11 +306,6 @@ int FontDisplayManager::getTotalFamilies() const
 {
     return NUM_FONT_FAMILIES;
 }
-
-
-
-
-
 
 
 void FontDisplayManager::forceUpdate()
@@ -249,10 +330,6 @@ const lgfx::IFont* FontDisplayManager::getCurrentFontPtr() const
     }
     return nullptr;
 }
-
-
-
-
 
 // Global instance for easy access
 FontDisplayManager fontManager;

@@ -14,6 +14,7 @@
 #pragma once
 
 #include <Arduino.h>
+#include "M5GFX.h" // For lgfx font types
 
 /**
  * @interface DeviceInterface
@@ -55,9 +56,6 @@ public:
     virtual void displayFont(const String &familyName, const String &fontName,
                              int fontSize, const lgfx::IFont *fontPtr, const char *sampleText) = 0;
 };
-
-// Forward declaration for LovyanGFX font type
-class lgfx::IFont;
 
 // Arduino-compatible font definitions with font pointer
 struct FontInfo
