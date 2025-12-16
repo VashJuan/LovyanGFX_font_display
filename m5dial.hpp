@@ -27,8 +27,8 @@
 class M5DialDevice : public DeviceInterface
 {
 private:
-    void setFont(const String &fontName);
     void drawWrappedText(const char *text, int centerX, int centerY);
+    int getStringWidth(const String& text);
 
 public:
     /**
@@ -64,10 +64,11 @@ public:
      * @param familyName Font family name
      * @param fontName Font name
      * @param fontSize Font size
+     * @param fontPtr Pointer to the font object
      * @param sampleText Sample text to display
      */
     void displayFont(const String &familyName, const String &fontName,
-                     int fontSize, const char *sampleText) override;
+                     int fontSize, const lgfx::IFont* fontPtr, const char *sampleText) override;
 
     /**
      * @brief Check if button was pressed

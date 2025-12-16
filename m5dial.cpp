@@ -38,67 +38,7 @@ int M5DialDevice::getDisplayHeight() const
     return M5Dial.Display.height();
 }
 
-void M5DialDevice::setFont(const String& fontName)
-{
-    if (fontName.indexOf("FreeMono") >= 0) {
-        if (fontName.indexOf("24pt") >= 0) {
-            M5Dial.Display.setFont(&fonts::FreeMono24pt7b);
-        } else if (fontName.indexOf("18pt") >= 0) {
-            M5Dial.Display.setFont(&fonts::FreeMono18pt7b);
-        } else if (fontName.indexOf("12pt") >= 0) {
-            M5Dial.Display.setFont(&fonts::FreeMono12pt7b);
-        } else {
-            M5Dial.Display.setFont(&fonts::FreeMono9pt7b);
-        }
-    } else if (fontName.indexOf("FreeSans") >= 0) {
-        if (fontName.indexOf("24pt") >= 0) {
-            M5Dial.Display.setFont(&fonts::FreeSans24pt7b);
-        } else if (fontName.indexOf("18pt") >= 0) {
-            M5Dial.Display.setFont(&fonts::FreeSans18pt7b);
-        } else if (fontName.indexOf("12pt") >= 0) {
-            M5Dial.Display.setFont(&fonts::FreeSans12pt7b);
-        } else {
-            M5Dial.Display.setFont(&fonts::FreeSans9pt7b);
-        }
-    } else if (fontName.indexOf("FreeSerif") >= 0) {
-        if (fontName.indexOf("24pt") >= 0) {
-            M5Dial.Display.setFont(&fonts::FreeSerif24pt7b);
-        } else if (fontName.indexOf("18pt") >= 0) {
-            M5Dial.Display.setFont(&fonts::FreeSerif18pt7b);
-        } else if (fontName.indexOf("12pt") >= 0) {
-            M5Dial.Display.setFont(&fonts::FreeSerif12pt7b);
-        } else {
-            M5Dial.Display.setFont(&fonts::FreeSerif9pt7b);
-        }
-    } else if (fontName.indexOf("Orbitron") >= 0) {
-        M5Dial.Display.setFont(&fonts::Orbitron_Light_24);
-    } else if (fontName.indexOf("Roboto") >= 0) {
-        M5Dial.Display.setFont(&fonts::Roboto_Thin_24);
-    } else if (fontName.indexOf("DejaVu") >= 0) {
-        if (fontName.indexOf("24") >= 0) {
-            M5Dial.Display.setFont(&fonts::DejaVu24);
-        } else if (fontName.indexOf("18") >= 0) {
-            M5Dial.Display.setFont(&fonts::DejaVu18);
-        } else {
-            M5Dial.Display.setFont(&fonts::DejaVu12);
-        }
-    } else {
-        // Default to built-in fonts for lgfx_fonts family
-        if (fontName.indexOf("Font8") >= 0) {
-            M5Dial.Display.setFont(&fonts::Font8);
-        } else if (fontName.indexOf("Font7") >= 0) {
-            M5Dial.Display.setFont(&fonts::Font7);
-        } else if (fontName.indexOf("Font6") >= 0) {
-            M5Dial.Display.setFont(&fonts::Font6);
-        } else if (fontName.indexOf("Font4") >= 0) {
-            M5Dial.Display.setFont(&fonts::Font4);
-        } else if (fontName.indexOf("Font2") >= 0) {
-            M5Dial.Display.setFont(&fonts::Font2);
-        } else {
-            M5Dial.Display.setFont(&fonts::Font0);
-        }
-    }
-}
+
 
 
 void M5DialDevice::drawWrappedText(const char* text, int centerX, int centerY)
@@ -130,7 +70,7 @@ void M5DialDevice::drawWrappedText(const char* text, int centerX, int centerY)
 }
 
 void M5DialDevice::displayFont(const String& familyName, const String& fontName, 
-                               int fontSize, const char* sampleText)
+                               int fontSize, const lgfx::IFont* fontPtr, const char* sampleText)
 {
     clearDisplay();
     
@@ -153,8 +93,12 @@ void M5DialDevice::displayFont(const String& familyName, const String& fontName,
     String sizeStr = "Size: " + String(fontSize);
     M5Dial.Display.drawString(sizeStr, center_x - (M5Dial.Display.textWidth(sizeStr) / 2), 45);
 
-    // Set the actual font for sample text display
-    setFont(fontName);
+    // Set the actual font for sample text display using font pointer
+    if (fontPtr != nullptr) {
+        M5Dial.Display.setFont(fontPtr);
+    } else {
+        M5Dial.Display.setFont(&fonts::Font2); // Fallback font
+    }
     M5Dial.Display.setTextColor(WHITE);
     M5Dial.Display.setTextDatum(middle_center);
     
