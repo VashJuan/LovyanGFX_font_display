@@ -1,0 +1,139 @@
+/**
+ * @file fontmanager.hpp
+ * @brief Font Display Manager Header
+ * @version 1.0
+ * @date 2025-12-16
+ *
+ * @Hardwares: M5Dial
+ * @Platform Version: Arduino M5Stack Board Manager v2.0.7
+ * @Dependent Library:
+ * M5GFX: https://github.com/m5stack/M5GFX
+ * M5Unified: https://github.com/m5stack/M5Unified
+ */
+
+#pragma once
+
+#include <Arduino.h>
+#include "M5Dial.h"
+
+// Arduino-compatible font definitions
+struct FontInfo
+{
+    const char *family;
+    const char *name;
+    int size;
+};
+
+// Define font families - simplified for Arduino compatibility
+extern const FontInfo fontFamilies[][20];
+extern const int NUM_FONT_FAMILIES;
+
+/**
+ * @class FontDisplayManager
+ * @brief Manages font family display based on encoder position
+ *
+ * This class allows cycling through different font families and displaying
+ * sample text using fonts from the selected family based on encoder position.
+ */
+class FontDisplayManager
+{
+private:
+    int currentFamilyIndex;  // Currently selected font family
+    int currentFontIndex;    // Currently selected font within family
+    int lastEncoderPosition; // Last recorded encoder position
+    const char *sampleText;  // Sample text to display
+    bool displayChanged;     // Flag to track if display needs update
+
+    int getFontsInFamily(int familyIndex) const;
+    String getFamilyName(int familyIndex) const;
+    String getFontName(int familyIndex, int fontIndex) const;
+    void mapEncoderToFont(long encoderPosition);
+
+    // https://en.wikipedia.org/wiki/Pangram
+    const char *pangrams[7] = {
+        "Pack my box with five dozen liquor jugs",
+        "The quick brown fox jumps over the lazy dog",
+        "Glib jocks quiz nymph to vex dwarf.",
+        "Sphinx of black quartz, judge my vow.",
+        "How vexingly quick daft zebras jump!",
+        "The five boxing wizards jump quickly.",
+        "Jackdaws love my big sphinx of quartz."};
+
+public:
+    /**
+     * @brief Constructor
+     */
+    FontDisplayManager();
+
+    /**
+     * @brief Set sample text to display
+     * @param text Text to display with fonts
+     */
+    void setSampleText(const char *text);
+
+    /**
+     * @brief Update display based on encoder position
+     * @param encoderPosition Current encoder position
+     */
+    void update(long encoderPosition);
+
+    /**
+     * @brief Display current font with sample text
+     */
+    void displayCurrentFont();
+
+    /**
+     * @brief Display sample text using current font
+     */
+    void displaySampleText();
+
+    /**
+     * @brief Get current font family name
+     * @return Current font family name
+     */
+    String getCurrentFamilyName() const;
+
+    /**
+     * @brief Get current font name
+     * @return Current font name
+     */
+    String getCurrentFontName() const;
+
+    /**
+     * @brief Get total number of font families
+     * @return Number of font families
+     */
+    int getTotalFamilies() const;
+
+    /**
+     * @brief Get total number of fonts in current family
+     * @return Number of fonts in current family
+     */
+    int getFontsInCurrentFamily() const;
+
+    /**
+     * @brief Get current font family index
+     * @return Current font family index
+     */
+    int getCurrentFamilyIndex() const;
+
+    /**
+     * @brief Get current font index within family
+     * @return Current font index
+     */
+    int getCurrentFontIndex() const;
+
+    /**
+     * @brief Get font size of current font
+     * @return Font size
+     */
+    int getCurrentFontSize() const;
+
+    /**
+     * @brief Force display update
+     */
+    void forceUpdate();
+};
+
+// Global instance declaration
+extern FontDisplayManager fontManager;
