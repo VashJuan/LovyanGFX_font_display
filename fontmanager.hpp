@@ -53,7 +53,7 @@ public:
      * @param sampleText Sample text to display
      */
     virtual void displayFont(const String &familyName, const String &fontName,
-                             int fontSize, const lgfx::IFont* fontPtr, const char *sampleText) = 0;
+                             int fontSize, const lgfx::IFont *fontPtr, const char *sampleText) = 0;
 };
 
 // Forward declaration for LovyanGFX font type
@@ -65,7 +65,7 @@ struct FontInfo
     const char *family;
     const char *name;
     int size;
-    const lgfx::IFont* fontPtr;  // Pointer to actual font object
+    const lgfx::IFont *fontPtr; // Pointer to actual font object
 };
 
 // Define font families - simplified for Arduino compatibility
@@ -190,7 +190,7 @@ public:
      * @brief Get font pointer for current font
      * @return Pointer to current font object
      */
-    const lgfx::IFont* getCurrentFontPtr() const;
+    const lgfx::IFont *getCurrentFontPtr() const;
 
     /**
      * @brief Get total number of fonts across all families
@@ -203,7 +203,7 @@ public:
      * @param absoluteIndex Index across all fonts
      * @return Pointer to FontInfo or nullptr if invalid
      */
-    const FontInfo* getFontByAbsoluteIndex(int absoluteIndex) const;
+    const FontInfo *getFontByAbsoluteIndex(int absoluteIndex) const;
 };
 
 // Global instance declaration
