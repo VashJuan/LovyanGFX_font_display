@@ -88,4 +88,4 @@ public:
 };
 
 // Global instance declaration
-extern M5DialDevice m5dialDevice;
+extern M5DialDevice m5DialDevice;

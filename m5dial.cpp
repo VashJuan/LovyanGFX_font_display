@@ -100,25 +100,16 @@ void M5DialDevice::setFont(const String& fontName)
     }
 }
 
+
 void M5DialDevice::drawWrappedText(const char* text, int centerX, int centerY)
 {
     String sampleText = String(text);
     
-/**  * Helper function to calculate string width in pixels
-  * Source: https://codingtechroom.com/question/-calculate-string-font-width-pixels
-  */
-function getStringWidth(text, font) {
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
-  context.font = font;
-  const textWidth = context.measureText(text).width;
-  return textWidth;
-}
-    
-
-
     // if wider than the display, insert carriage returns
     int textWidth = M5Dial.Display.textWidth(sampleText);
+
+    Serial.println("Text width: " + String(textWidth) + ", Display width: " + String(getDisplayWidth()));
+
     if (textWidth > getDisplayWidth() - 20) {
         String modifiedText;
         int lineWidth = 0;
@@ -200,4 +191,4 @@ void M5DialDevice::showStartupMessage(const char* message)
 }
 
 // Global instance for easy access
-M5DialDevice m5dialDevice;
+M5DialDevice m5DialDevice;

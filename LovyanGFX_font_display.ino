@@ -26,14 +26,14 @@ void setup()
     Serial.println("Font Display starting...");
 
     // Initialize M5Dial device
-    m5dialDevice.begin();
-    m5dialDevice.showStartupMessage("M5 Dial Font Display v 1.0");
+    m5DialDevice.begin();
+    m5DialDevice.showStartupMessage("M5 Dial Font Display v 1.0");
     delay(750);
 
     encoder.setup();
 
     // Initialize font manager with device interface and sample text
-    fontManager.setDevice(&m5dialDevice);
+    fontManager.setDevice(&m5DialDevice);
     fontManager.setSampleText("Hello World!");
 
     Serial.println("Setup done.");
@@ -42,7 +42,7 @@ void setup()
 
 void loop()
 {
-    M5Dial.update();
+    m5DialDevice.update();
 
     // Check if encoder position changed
     if (encoder.hasPositionChanged())
