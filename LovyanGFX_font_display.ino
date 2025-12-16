@@ -32,7 +32,7 @@ void setup()
     M5Dial.Display.setTextDatum(middle_center);
     M5Dial.Display.setTextSize(1);
 
-    M5Dial.Display.drawString("M5 Dial Font Display v 1.0", M5Dial.Display.width() / 2, M5Dial.Display.height() / 2);
+    M5Dial.Display.drawString("M5 Dial Font Display v 1.0", M5Dial.Display.width() / 2, M5Dial.Display.height() / 2 + 15);
     delay(750);
 
     encoder.setup();

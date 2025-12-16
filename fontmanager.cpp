@@ -198,7 +198,7 @@ void FontDisplayManager::displayCurrentFont()
 
     // Display font name
     String fontName = "Font: " + getFontName(currentFamilyIndex, currentFontIndex);
-    M5Dial.Display.drawString(fontName, center_x - (M5Dial.Display.textWidth(fontName) / 2), 25);
+    M5Dial.Display.drawString(fontName, center_x - (M5Dial.Display.textWidth(fontName) / 2), 30);
 
     // Display font size
     if (currentFamilyIndex >= 0 && currentFamilyIndex < NUM_FONT_FAMILIES &&
@@ -211,11 +211,11 @@ void FontDisplayManager::displayCurrentFont()
     displaySampleText();
 
     // Display navigation info at bottom
-    M5Dial.Display.setFont(&fonts::Font2);
+    M5Dial.Display.setFont(&fonts::Font3);
     M5Dial.Display.setTextColor(YELLOW);
     M5Dial.Display.setTextDatum(bottom_center);
-    M5Dial.Display.drawString("Turn encoder to change font", M5Dial.Display.width() / 2, M5Dial.Display.height() - 30);
-    M5Dial.Display.drawString("Press button to change text", M5Dial.Display.width() / 2, M5Dial.Display.height() - 20);
+    M5Dial.Display.drawString("Turn encoder: change font", M5Dial.Display.width() / 2, M5Dial.Display.height() - 40);
+    M5Dial.Display.drawString("Press button: change text", M5Dial.Display.width() / 2, M5Dial.Display.height() - 25);
 }
 
 void FontDisplayManager::displaySampleText()
