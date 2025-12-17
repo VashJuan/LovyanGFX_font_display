@@ -46,7 +46,8 @@ void M5DialDevice::drawWrappedText(const char* text, int centerX, int centerY)
     String sampleText = String(text);
     
     // if wider than the display, insert carriage returns
-    int textWidth = M5Dial.Display.textWidth(sampleText);
+    int textWidth = M5Dial.Display.textWidth(sampleText); 
+    // per https://github.com/m5stack/M5GFX/blob/master/src/lgfx/v1/LGFXBase.cpp:2151 should have font pointer as 2nd parameter
 
     Serial.println("Text width: " + String(textWidth) + ", Display width: " + String(getDisplayWidth()));
 
@@ -114,7 +115,10 @@ void M5DialDevice::displayFont(const String& familyName, const String& fontName,
     M5Dial.Display.drawString("Press button: change text", getDisplayWidth() / 2, getDisplayHeight() - 25);
 }
 
-
+bool M5DialDevice::wasButtonPressed()
+{
+    return M5Dial.BtnA.wasPressed();
+}
 
 void M5DialDevice::update()
 {

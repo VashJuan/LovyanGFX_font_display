@@ -90,9 +90,6 @@ const FontInfo fontFamilies[][20] = {
     // Orbitron family
     {
         {"Orbitron", "Orbitron_Light_24", 24, &fonts::Orbitron_Light_24},
-        {"Orbitron", "Orbitron_Light_32", 32, &fonts::Orbitron_Light_32},
-        {"Orbitron", "Orbitron_Medium_24", 24, &fonts::Orbitron_Medium_20},
-        {"Orbitron", "Orbitron_Medium_32", 32, &fonts::Orbitron_Medium_32},
         {nullptr, nullptr, 0, nullptr} // End marker
     },
     // Roboto and other decorative fonts
@@ -112,7 +109,9 @@ const FontInfo fontFamilies[][20] = {
         {"DejaVu", "DejaVu56", 56, &fonts::DejaVu56},
         {"DejaVu", "DejaVu72", 72, &fonts::DejaVu72},
         {nullptr, nullptr, 0, nullptr} // End marker
-    },
+    }
+    /** remove these to save memory space!
+    ,
     // Japanese Mincho family
     {
         {"JapanMincho", "lgfxJapanMincho_8", 8, &fonts::lgfxJapanMincho_8},
@@ -126,7 +125,7 @@ const FontInfo fontFamilies[][20] = {
         {"JapanMincho", "lgfxJapanMinchoP_20", 20, &fonts::lgfxJapanMinchoP_20},
         {"JapanMincho", "lgfxJapanMinchoP_24", 24, &fonts::lgfxJapanMinchoP_24},
         {nullptr, nullptr, 0, nullptr} // End marker
-    },
+    }
     // Japanese Gothic family
     {
         {"JapanGothic", "lgfxJapanGothic_8", 8, &fonts::lgfxJapanGothic_8},
@@ -159,9 +158,10 @@ const FontInfo fontFamilies[][20] = {
         {"eFontJA", "efontJA_24", 24, &fonts::efontJA_24},
         {nullptr, nullptr, 0, nullptr} // End marker
     }
+    */
 };
 
-const int NUM_FONT_FAMILIES = 12;
+const int NUM_FONT_FAMILIES = sizeof(fontFamilies) / sizeof(fontFamilies[0]);
 
 // Constructor implementation
 FontDisplayManager::FontDisplayManager(DeviceInterface* deviceInterface) : 

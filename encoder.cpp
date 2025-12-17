@@ -16,22 +16,14 @@ void Encoder::setup() {
     oldPosition = -999;
 }
 
-
-
 long Encoder::getPosition() {
     return M5Dial.Encoder.read();
 }
-
-
-
-
 
 bool Encoder::hasPositionChanged() {
     long currentPosition = M5Dial.Encoder.read();
     return currentPosition != oldPosition;
 }
-
-
 
 // Global instance for easy access
 Encoder encoder;
