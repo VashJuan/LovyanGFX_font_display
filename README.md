@@ -2,6 +2,8 @@
 
 A demo program for M5 Stack devices to display the various LovyanGFX fonts.
 
+![Example of LovyanGFX Font Display showing the DejaVu font](./imgs/DejaVu24.jpg "LovyanGFX Font Display showing the DejaVu font")
+
 ## Description
 
 This Arduino project displays over 100 different font variants across 12
@@ -32,6 +34,8 @@ When powered on, users on an M5Dial can:
       - How vexingly quick daft zebras jump!
       - The five boxing wizards jump quickly
       - Jackdaws love my big sphinx of quartz.
+
+![Example of LovyanGFX Font Display showing the FreeMono font](./imgs/FreeMono9.jpg "LovyanGFX Font Display showing the FreeMono font")
 
 ## Features
 
@@ -94,6 +98,8 @@ When powered on, users on an M5Dial can:
    sample texts
 5. Font information is displayed at the top of the screen
 6. Serial monitor shows additional limited debug information
+
+![Example of LovyanGFX Font Display showing the FreeSerif24 font](./imgs/FreeSerif24.jpg "LovyanGFX Font Display showing the FreeSerif24 font")
 
 ## File Structure
 
