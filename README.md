@@ -1,6 +1,6 @@
 # LovyanGFX Font Display
 
-A demo program for M5 Stack devices to display the various LovyanGFX fonts.
+An open source, free program to display all LovyanGFX fonts on M5 Stack devices.
 
 ![Example of LovyanGFX Font Display showing the DejaVu font](./imgs/DejaVu24.jpg "LovyanGFX Font Display showing the DejaVu font")
 
@@ -36,6 +36,10 @@ When powered on, users on an M5Dial can:
       - Jackdaws love my big sphinx of quartz.
 
 ![Example of LovyanGFX Font Display showing the FreeMono font](./imgs/FreeMono9.jpg "LovyanGFX Font Display showing the FreeMono font")
+
+## Source code repository
+
+([https://github.com/VashJuan/LovyanGFX_font_display](https://github.com/VashJuan/LovyanGFX_font_display))
 
 ## Features
 
