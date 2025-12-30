@@ -24,8 +24,8 @@ When powered on, users on an M5Dial can:
   the families various individual fonts that vary in size and style (italic &
   bold),
 - Press the bottom M5 button to cycle through some dozen sample text strings,
-  including ([seven Panagrams] (<https://en.wikipedia.org/wiki/Pangram>)),
-  phrases that use all the letters of the alphabet:
+  including [seven Panagrams](https://en.wikipedia.org/wiki/Pangram), phrases
+  that use all the letters of the alphabet:
 
       - Pack my box with five dozen liquor jugs
       - The quick brown fox jumps over the lazy dog
@@ -39,7 +39,7 @@ When powered on, users on an M5Dial can:
 
 ## Source code repository
 
-([https://github.com/VashJuan/LovyanGFX_font_display](https://github.com/VashJuan/LovyanGFX_font_display))
+<https://github.com/VashJuan/LovyanGFX_font_display>
 
 ## ✨ Features
 
@@ -81,17 +81,17 @@ When powered on, users on an M5Dial can:
 The easiest way to get started is using the pre-configured VSCode workspace:
 
 1. **Prerequisites**:
+
    - [Visual Studio Code](https://code.visualstudio.com/)
    - [PlatformIO IDE Extension](https://platformio.org/install/ide?install=vscode)
 
 2. **Clone and open**:
-   ```bash
-   git clone https://github.com/vashjuan/m5Dial_font_display.git
-   cd LovyanGFX_font_display
-   code LovyanGFX_M5Dial.code-workspace
-   ```
+
+   git clone https://github.com/vashjuan/m5Dial_font_display.git cd
+   LovyanGFX_font_display code LovyanGFX_M5Dial.code-workspace
 
 3. **Install recommended extensions** (VSCode will prompt you):
+
    - PlatformIO IDE
    - C/C++ Extension Pack
    - Code Spell Checker
@@ -112,8 +112,8 @@ The easiest way to get started is using the pre-configured VSCode workspace:
 
 2. **Clone the repository**:
 
-       git clone https://github.com/vashjuan/m5Dial_font_display.git
-       cd LovyanGFX_font_display
+   git clone https://github.com/vashjuan/m5Dial_font_display.git cd
+   LovyanGFX_font_display
 
 3. **Build and upload**:
 
@@ -135,9 +135,7 @@ The easiest way to get started is using the pre-configured VSCode workspace:
 
 1. **Clone this repository**:
 
-   ```bash
    git clone https://github.com/vashjuan/m5Dial_font_display.git
-   ```
 
 2. **Open project**: Open `LovyanGFX_font_display.ino` in Arduino IDE
 
@@ -158,39 +156,38 @@ The easiest way to get started is using the pre-configured VSCode workspace:
 The included `LovyanGFX_M5Dial.code-workspace` provides:
 
 - **🔧 Preconfigured Tasks**: Build, upload, monitor, and clean with one click
-- **📝 IntelliSense**: Full C++ code completion and error detection  
+- **📝 IntelliSense**: Full C++ code completion and error detection
 - **🎯 Integrated Terminal**: Direct access to PlatformIO commands
 - **📁 Smart File Organization**: Proper exclude patterns for build files
 - **✏️ Code Formatting**: Automatic C++ formatting and spell checking
 - **🔌 Extension Recommendations**: Auto-prompts for required extensions
 
 ### 🎮 Quick Commands in VSCode:
+
 - **Ctrl+Shift+P** → "PlatformIO: Build" - Build the project
-- **Ctrl+Shift+P** → "PlatformIO: Upload" - Upload to M5Dial  
+- **Ctrl+Shift+P** → "PlatformIO: Upload" - Upload to M5Dial
 - **Ctrl+Shift+P** → "PlatformIO: Serial Monitor" - View serial output
 - **Ctrl+Shift+P** → "Tasks: Run Task" - Access custom build tasks
 
 ### 🔍 Project Structure
 
-```
-LovyanGFX_font_display/
-├── 📄 platformio.ini                    # PlatformIO configuration (ESP32-S3)
-├── 📋 LovyanGFX_M5Dial.code-workspace   # VSCode workspace configuration  
-├── 📁 .vscode/                          # VSCode settings
-│   ├── settings.json                    # Editor settings
-│   ├── c_cpp_properties.json          # C++ IntelliSense config
-│   ├── launch.json                     # Debug configuration
-│   └── extensions.json                 # Recommended extensions
-├── 📁 src/                              # Source files
-│   ├── 🎯 LovyanGFX_font_display.ino    # Main Arduino sketch
-│   ├── 🔧 encoder.cpp/hpp              # Encoder handling
-│   ├── 🎨 fontmanager.cpp/hpp          # Font display management
-│   └── 📱 m5dial.cpp/hpp               # M5Dial device interface
-├── 📁 lib/                              # Custom libraries (if any)
-├── 📁 include/                          # Header files
-├── 📁 imgs/                             # Documentation images
-└── 📖 README.md                         # This documentation
-```
+    LovyanGFX_font_display/
+    ├── 📄 platformio.ini                    # PlatformIO configuration (ESP32-S3)
+    ├── 📋 LovyanGFX_M5Dial.code-workspace   # VSCode workspace configuration
+    ├── 📁 .vscode/                          # VSCode settings
+    │   ├── settings.json                    # Editor settings
+    │   ├── c_cpp_properties.json          # C++ IntelliSense config
+    │   ├── launch.json                     # Debug configuration
+    │   └── extensions.json                 # Recommended extensions
+    ├── 📁 src/                              # Source files
+    │   ├── 🎯 LovyanGFX_font_display.ino    # Main Arduino sketch
+    │   ├── 🔧 encoder.cpp/hpp              # Encoder handling
+    │   ├── 🎨 fontmanager.cpp/hpp          # Font display management
+    │   └── 📱 m5dial.cpp/hpp               # M5Dial device interface
+    ├── 📁 lib/                              # Custom libraries (if any)
+    ├── 📁 include/                          # Header files
+    ├── 📁 imgs/                             # Documentation images
+    └── 📖 README.md                         # This documentation
 
 ## 🎮 Usage
 
@@ -215,19 +212,13 @@ LovyanGFX_font_display/
 
 ### 🗂️ Class Architecture
 
-```
-🎨 FontDisplayManager (fontmanager.hpp)
-    ↓ uses
-📱 DeviceInterface (abstract)
-    ↓ implemented by
-📟 M5DialDevice (m5dial.hpp)
-    ↓ uses
-🔧 EncoderHandler (encoder.hpp)
-```
-
-## 📝 Sample Texts
-
-The program cycles through these sample texts when the button is pressed:
+    🎨 FontDisplayManager (fontmanager.hpp)
+        ↓ uses
+    📱 DeviceInterface (abstract)
+        ↓ implemented by
+    📟 M5DialDevice (m5dial.hpp)
+        ↓ uses
+    🔧 EncoderHandler (encoder.hpp)
 
 - "Hello World!"
 - "Font Demo"
@@ -250,34 +241,30 @@ The program outputs font information to the serial monitor for debugging:
 
 ### 🛠️ Building with PlatformIO
 
-```bash
-# Clean build
-pio run --target clean
+    # Clean build
+    pio run --target clean
 
-# Build only
-pio run
+    # Build only
+    pio run
 
-# Build and upload
-pio run --target upload
+    # Build and upload
+    pio run --target upload
 
-# Upload filesystem (if applicable)
-pio run --target uploadfs
+    # Upload filesystem (if applicable)
+    pio run --target uploadfs
 
-# Monitor serial output
-pio device monitor
+    # Monitor serial output
+    pio device monitor
 
-# Build with verbose output
-pio run -v
-```
+    # Build with verbose output
+    pio run -v
 
 ### 🐛 Debugging
 
 - Enable debug output by modifying `build_flags` in `platformio.ini`:
 
-  ```ini
-  build_flags =
-      -DCORE_DEBUG_LEVEL=5  ; Set to 0-5 for different debug levels
-  ```
+      build_flags =
+          -DCORE_DEBUG_LEVEL=5  ; Set to 0-5 for different debug levels
 
 - Use PlatformIO's built-in debugger (requires compatible hardware debugger)
 
