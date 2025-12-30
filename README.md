@@ -235,7 +235,27 @@ The program outputs font information to the serial monitor for debugging:
 
 ## 👨‍💻 Development
 
-### 🛠️ Building with PlatformIO
+### � Hardware-Specific Implementation
+
+#### Encoder Functionality
+
+The encoder implementation has been updated to use the recommended M5Stack
+approach:
+
+- **Direct GPIO Reading**: Uses proper hardware pins (40, 41) for M5Dial encoder
+- **Quadrature Encoding**: Implements proper encoder position tracking
+- **Pull-up Resistors**: Correctly configured input pins with internal pull-ups
+- **Position Methods**: Supports `getPosition()`, `resetPosition()`, and
+  `setPosition()`
+
+The encoder class provides a clean interface following M5Stack documentation
+standards:
+
+- Initializes encoder pins during setup
+- Tracks position changes with minimal overhead
+- Provides reset and set position functionality for advanced use cases
+
+### �🛠️ Building with PlatformIO
 
     # Clean build
     pio run --target clean

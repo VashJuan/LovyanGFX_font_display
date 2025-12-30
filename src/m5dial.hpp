@@ -80,6 +80,12 @@ public:
      * @param message Message to display
      */
     void showStartupMessage(const char *message);
+
+    /**
+     * @brief Check if button was pressed
+     * @return true if button was pressed
+     */
+    bool wasButtonPressed();
 };
 
 // Global instance declaration

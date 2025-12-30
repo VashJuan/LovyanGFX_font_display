@@ -57,6 +57,17 @@ public:
      * @return true if position changed since last check
      */
     bool hasPositionChanged();
+
+    /**
+     * @brief Reset encoder position to 0
+     */
+    void resetPosition();
+
+    /**
+     * @brief Set encoder to specific position
+     * @param position Target position value
+     */
+    void setPosition(long position);
 };
 
 // Global instance for easy access
