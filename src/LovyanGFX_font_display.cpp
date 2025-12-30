@@ -1,5 +1,5 @@
 /**
- * @file LovyanGFX_font_display.ino
+ * @file LovyanGFX_font_display.cpp
  * @url https://github.com/vashjuan/M5Dial_font_display
  * @author John Cornelison (john@vashonSoftware.com)
  * @brief Display all LovyanGFX fonts, (on M5Dial) using an encoder to scroll through them.
@@ -15,7 +15,8 @@
  * M5Unified: https://github.com/m5stack/M5Unified
  */
 
-#include "M5Dial.h"
+#include <Arduino.h>
+#include <M5Unified.h>
 #include "encoder.hpp"
 #include "fontmanager.hpp"
 #include "m5dial.hpp"
@@ -61,7 +62,7 @@ void loop()
     }
 
     // Handle button press to change sample text
-    if (M5Dial.BtnA.wasPressed())
+    if (M5.BtnA.wasPressed())
     {
         static int textIndex = 0;
 

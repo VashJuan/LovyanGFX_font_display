@@ -11,17 +11,17 @@ Encoder::~Encoder() {
 }
 
 void Encoder::setup() {
-    //M5Dial.Display.drawString("Encoder Test", M5Dial.Display.width() / 2, M5Dial.Display.height() / 2);
+    //M5.Display.drawString("Encoder Test", M5.Display.width() / 2, M5.Display.height() / 2);
     //delay(2000);
     oldPosition = -999;
 }
 
 long Encoder::getPosition() {
-    return M5Dial.Encoder.read();
+    return M5.Encoder.read();
 }
 
 bool Encoder::hasPositionChanged() {
-    long currentPosition = M5Dial.Encoder.read();
+    long currentPosition = M5.Encoder.read();
     return currentPosition != oldPosition;
 }
 

@@ -12,7 +12,7 @@
  */
 
 #include "fontmanager.hpp"
-#include "M5Dial.h"  // For font definitions
+#include <M5Unified.h>  // For font definitions
 
 // Define font families with font pointers for easy iteration
 const FontInfo fontFamilies[][20] = {
