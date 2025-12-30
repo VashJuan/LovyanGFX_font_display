@@ -87,7 +87,7 @@ The easiest way to get started is using the pre-configured VSCode workspace:
 
 2. **Clone and open**:
 
-   git clone https://github.com/vashjuan/m5Dial_font_display.git cd
+   git clone <https://github.com/vashjuan/m5Dial_font_display.git> cd
    LovyanGFX_font_display code LovyanGFX_M5Dial.code-workspace
 
 3. **Install recommended extensions** (VSCode will prompt you):
@@ -105,37 +105,33 @@ The easiest way to get started is using the pre-configured VSCode workspace:
 
 ### Option 2: PlatformIO CLI 🛠️
 
-1. **Install PlatformIO**:
+1.  **Install PlatformIO**:
 
-   - [Install PlatformIO IDE](https://platformio.org/platformio-ide) or
-   - Install PlatformIO Core: `pip install platformio`
+    - [Install PlatformIO IDE](https://platformio.org/platformio-ide) or
+    - Install PlatformIO Core: `pip install platformio`
 
-2. **Clone the repository**:
+2.  **Clone the repository**:
 
-   git clone https://github.com/vashjuan/m5Dial_font_display.git cd
-   LovyanGFX_font_display
+    git clone <https://github.com/vashjuan/m5Dial_font_display.git> cd
+    LovyanGFX_font_display
 
-3. **Build and upload**:
+3.  **Build and upload**:
 
-   ```bash
-   # Using PlatformIO CLI
-   pio run --target upload
+        # Using PlatformIO CLI
+        pio run --target upload
 
-   # Or using PlatformIO IDE
-   # Open the project folder and click the upload button
-   ```
+        # Or using PlatformIO IDE
+        # Open the project folder and click the upload button
 
-4. **Monitor serial output**:
+4.  **Monitor serial output**:
 
-   ```bash
-   pio device monitor
-   ```
+        pio device monitor
 
 ### Option 3: Arduino IDE 🔧
 
 1. **Clone this repository**:
 
-   git clone https://github.com/vashjuan/m5Dial_font_display.git
+   git clone <https://github.com/vashjuan/m5Dial_font_display.git>
 
 2. **Open project**: Open `LovyanGFX_font_display.ino` in Arduino IDE
 
@@ -162,7 +158,7 @@ The included `LovyanGFX_M5Dial.code-workspace` provides:
 - **✏️ Code Formatting**: Automatic C++ formatting and spell checking
 - **🔌 Extension Recommendations**: Auto-prompts for required extensions
 
-### 🎮 Quick Commands in VSCode:
+### 🎮 Quick Commands in VSCode
 
 - **Ctrl+Shift+P** → "PlatformIO: Build" - Build the project
 - **Ctrl+Shift+P** → "PlatformIO: Upload" - Upload to M5Dial
@@ -309,14 +305,8 @@ This project is open source. Feel free to use, modify, and distribute.
 
 ---
 
-<div align="center">
-
 ### 🌟 If you found this project helpful, please give it a star! ⭐
-
-**Made with ❤️ for the M5Stack community**
 
 📧 [Report Issues](https://github.com/vashjuan/m5Dial_font_display/issues) • 💬
 [Discussions](https://github.com/vashjuan/m5Dial_font_display/discussions) • 🚀
 [Latest Release](https://github.com/vashjuan/m5Dial_font_display/releases)
-
-</div>
