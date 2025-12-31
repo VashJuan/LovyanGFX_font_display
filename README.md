@@ -343,7 +343,9 @@ standards:
 
 **John Cornelison** (<john@vashonSoftware.com>)
 
-## 📋 Version
+## 📋 Versions
+
+**v2.0** - Second release (2025-12-30)
 
 **v1.0** - Initial release (2025-12-16)
 

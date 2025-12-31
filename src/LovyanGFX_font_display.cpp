@@ -31,10 +31,10 @@ void setup()
     delay(1000);
 
     Serial.println();
-    Serial.println("=== M5 Dial Font Display v1.1.0 ===");
+    Serial.println("=== M5 Dial Font Display v2.0.0 ===");
 
     // Show startup screen
-    m5DialDevice.showStartupMessage("Font Display");
+    m5DialDevice.showStartupMessage("LovyanGFX Font Display");
     delay(2500);
 
     // Setup encoder
