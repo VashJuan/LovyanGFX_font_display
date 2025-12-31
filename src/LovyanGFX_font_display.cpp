@@ -5,7 +5,6 @@
  * @brief Display all LovyanGFX fonts, (on M5Dial) using an encoder to scroll through them.
   This is a demo program for M5Dial to show the various fonts available in LovyanGFX.
   Use the encoder to scroll through the fonts displayed on the screen.
- * @version 2.0.0
  * @date 2025-12-15
  *
  * @Hardwares: M5Dial
@@ -20,6 +19,7 @@
 #include "encoder.hpp"
 #include "fontmanager.hpp"
 #include "m5dial.hpp"
+#include "version.h"
 
 void setup()
 {
@@ -31,7 +31,7 @@ void setup()
     delay(1000);
 
     Serial.println();
-    Serial.println("=== M5 Dial Font Display v2.0.0 ===");
+    Serial.println(STARTUP_MESSAGE_VERSION);
 
     // Show startup screen
     m5DialDevice.showStartupMessage("LovyanGFX Font Display");

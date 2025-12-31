@@ -234,7 +234,7 @@ The included `LovyanGFX_M5Dial.code-workspace` provides:
 ## 🎮 Usage
 
 1. Power on the M5Dial
-2. The device will display "M5 Dial Font Display v 1.0" on startup
+2. The device will display "M5 Dial Font Display v2.0.1" on startup
 3. Rotate the encoder to cycle through different fonts
 4. Press the button (at bottom of dial, embossed with "M5") to cycle through the
    sample texts
@@ -301,6 +301,69 @@ standards:
 - Tracks position changes with minimal overhead
 - Provides reset and set position functionality for advanced use cases
 
+### 🏷️ Version Management
+
+This project uses **automated git-based version management** for consistent
+versioning across all builds and releases.
+
+#### How It Works
+
+- **Single Source of Truth**: Git tags define the project version
+- **Build-Time Injection**: Version is automatically injected during compilation
+  using `git describe --tags --always`
+- **No Hardcoded Versions**: Source files contain no version strings -
+  everything is derived from git state
+
+#### Version Display
+
+The system automatically determines version based on git repository state:
+
+- **Exact Tag**: `v2.0.1` (when built from tagged commit)
+- **Post-Release**: `v2.0.1-3-g1234abc` (3 commits past v2.0.1 tag)
+- **No Tags**: `1234abc` (commit hash when no tags exist)
+
+#### Creating a New Release
+
+1. **Prepare your changes:**
+
+   ```bash
+   git add .
+   git commit -m "Ready for v2.0.2 release"
+   ```
+
+2. **Create and push the tag:**
+
+   ```bash
+   git tag v2.0.2
+   git push origin main --tags
+   ```
+
+3. **Build automatically uses new version:**
+   ```bash
+   pio run --target upload  # Shows "v2.0.2" in startup message
+   ```
+
+#### For Developers
+
+- **No manual version updates needed** - git tags handle everything
+- **Development builds show commit distance** from last release
+- **Branch-specific versions** - different branches can have different version
+  histories
+- **Version appears in**:
+  - Device startup message: `"M5 Dial Font Display v2.0.2"`
+  - Serial output: `"=== M5 Dial Font Display v2.0.2 ==="`
+  - Build logs: `PROJECT_VERSION="v2.0.2"`
+
+#### Legacy Scripts (Optional)
+
+For additional automation, version update scripts are available in `/scripts/`:
+
+- `update_version.ps1` (PowerShell)
+- `update_version.sh` (Bash)
+
+**Note**: With git-based versioning, these scripts are optional but can help
+with README updates.
+
 ### �🛠️ Building with PlatformIO
 
     # Clean build
@@ -345,6 +408,8 @@ standards:
 
 ## 📋 Versions
 
+**v2.0.1** - Minor updates and fixes (2025-12-30)
+
 **v2.0** - Second release (2025-12-30)
 
 **v1.0** - Initial release (2025-12-16)
@@ -362,6 +427,21 @@ This project is open source. Feel free to use, modify, and distribute.
 3. 💾 Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. 📤 Push to the branch (`git push origin feature/amazing-feature`)
 5. 🔄 Open a Pull Request
+
+### 🏷️ Version Management for Contributors
+
+- **No manual version updates** needed in source files
+- **Git tags control versions** - maintainers will tag releases
+- **Development versions** automatically show commit distance (e.g.,
+  `v2.0.1-5-g8abc123`)
+- **Test your changes** by building: `pio run --target upload`
+
+### 🔧 Development Guidelines
+
+- **Version Display**: Check startup message shows correct git-derived version
+- **Code Style**: Follow existing formatting and commenting patterns
+- **Testing**: Verify encoder functionality and font display work correctly
+- **Documentation**: Update README.md if adding new features
 
 ### 💡 Ideas for contributions
 

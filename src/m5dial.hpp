@@ -1,7 +1,6 @@
 /**
  * @file m5dial.hpp
  * @brief M5Dial Device Interface Header
- * @version 2.0.0
  * @date 2025-12-16
  *
  * @Hardwares: M5Dial

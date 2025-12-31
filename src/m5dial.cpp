@@ -1,7 +1,6 @@
 /**
  * @file M5.cpp
  * @brief M5Dial Device Interface Implementation
- * @version 2.0.0
  * @date 2025-12-16
  *
  * @Hardwares: M5Dial
@@ -167,30 +166,27 @@ void M5DialDevice::update()
 
 void M5DialDevice::showStartupMessage(const char *message)
 {
+    const int centerX = getDisplayWidth() / 2;
+    const int offsetY = getDisplayHeight() / 2;
+
     clearDisplay();
 
-    // Main title using Yellowtail font, size 32
     M5.Display.setTextColor(GREEN);
     M5.Display.setTextDatum(middle_center);
     M5.Display.setTextSize(1);
-    M5.Display.setFont(&fonts::Yellowtail_32);
-    M5.Display.drawString(message, getDisplayWidth() / 2, getDisplayHeight() / 2 - 20);
+    M5.Display.setFont(&fonts::Satisfy_24);
+    drawWrappedText(message, centerX, offsetY - 40);
+    M5.Display.drawLine(0, offsetY - 20, getDisplayWidth(), offsetY - 20, WHITE);
 
-    // Instruction lines using Orbitron font (smaller size to fit in 240px width)
     M5.Display.setTextColor(WHITE);
     M5.Display.setTextDatum(middle_center);
     M5.Display.setTextSize(1);
-    M5.Display.setFont(&fonts::Orbitron_Light_24);
 
-    // Calculate appropriate font size for instructions to fit width
-    // Use a smaller built-in font for the instructions to ensure they fit
-    M5.Display.setFont(&fonts::Font2);
-
-    // First instruction line
-    M5.Display.drawString("Rotate dial to", getDisplayWidth() / 2, getDisplayHeight() / 2 + 25);
-
-    // Second instruction line
-    M5.Display.drawString("scroll thru fonts", getDisplayWidth() / 2, getDisplayHeight() / 2 + 40);
+    M5.Display.setFont(&fonts::DejaVu12);
+    drawWrappedText("https://github.com/VashJuan/ LovyanGFX_font_display", centerX, offsetY + 10);
+    M5.Display.setFont(&fonts::FreeMono12pt7b);
+    M5.Display.setTextColor(VIOLET);
+    drawWrappedText("Rotate dial to scroll thru fonts", centerX, offsetY + 70);
 }
 
 // Global instance for easy access
