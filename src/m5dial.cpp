@@ -12,6 +12,7 @@
  */
 
 #include "m5dial.hpp"
+#include <vector>
 
 M5DialDevice::M5DialDevice()
 {
@@ -38,43 +39,79 @@ int M5DialDevice::getDisplayHeight() const
     return M5.Display.height();
 }
 
-
-
-
-void M5DialDevice::drawWrappedText(const char* text, int centerX, int centerY)
+void M5DialDevice::drawWrappedText(const char *text, int centerX, int centerY)
 {
     String sampleText = String(text);
-    
-    // if wider than the display, insert carriage returns
-    int textWidth = M5.Display.textWidth(sampleText); 
-    // per https://github.com/m5stack/M5GFX/blob/master/src/lgfx/v1/LGFXBase.cpp:2151 should have font pointer as 2nd parameter
 
-    Serial.println("Text width: " + String(textWidth) + ", Display width: " + String(getDisplayWidth()));
+    int textWidth = M5.Display.textWidth(sampleText);
+    int maxWidth = getDisplayWidth() - 20;
 
-    if (textWidth > getDisplayWidth() - 20) {
-        String modifiedText;
-        int lineWidth = 0;
-        for (unsigned int i = 0; i < sampleText.length(); i++) {
-            char c = sampleText.charAt(i);
-            lineWidth += M5.Display.textWidth(String(c));
-            if (lineWidth > getDisplayWidth() - 20 && c == ' ') {
-                modifiedText += '\n';
-                lineWidth = 0;
-            } else {
-                modifiedText += c;
+    if (textWidth <= maxWidth)
+    {
+        // Fits on one line
+        M5.Display.drawString(sampleText, centerX, centerY);
+        return;
+    }
+
+    // Need to wrap - build lines that fit
+    std::vector<String> lines;
+    String currentLine = "";
+    int currentWidth = 0;
+
+    for (unsigned int i = 0; i < sampleText.length(); i++)
+    {
+        char c = sampleText.charAt(i);
+        int charWidth = M5.Display.textWidth(String(c));
+
+        // Check if adding this character would exceed width
+        if (currentWidth + charWidth > maxWidth && currentLine.length() > 0)
+        {
+            // Try to break at last space
+            int lastSpace = currentLine.lastIndexOf(' ');
+            if (lastSpace > 0 && lastSpace < currentLine.length() - 1)
+            {
+                // Break at space
+                lines.push_back(currentLine.substring(0, lastSpace));
+                currentLine = currentLine.substring(lastSpace + 1) + c;
+                currentWidth = M5.Display.textWidth(currentLine);
+            }
+            else
+            {
+                // No space found, force break
+                lines.push_back(currentLine);
+                currentLine = String(c);
+                currentWidth = charWidth;
             }
         }
-        sampleText = modifiedText;
+        else
+        {
+            currentLine += c;
+            currentWidth += charWidth;
+        }
     }
-    
-    M5.Display.drawString(sampleText, centerX, centerY);
+
+    // Add last line
+    if (currentLine.length() > 0)
+    {
+        lines.push_back(currentLine);
+    }
+
+    // Calculate line height and draw centered
+    int lineHeight = M5.Display.fontHeight();
+    int totalHeight = lineHeight * lines.size();
+    int startY = centerY - (totalHeight / 2);
+
+    for (size_t i = 0; i < lines.size(); i++)
+    {
+        M5.Display.drawString(lines[i], centerX, startY + (i * lineHeight));
+    }
 }
 
-void M5DialDevice::displayFont(const String& familyName, const String& fontName, 
-                               int fontSize, const lgfx::IFont* fontPtr, const char* sampleText)
+void M5DialDevice::displayFont(const String &familyName, const String &fontName,
+                               int fontSize, const lgfx::IFont *fontPtr, const char *sampleText)
 {
     clearDisplay();
-    
+
     const int center_x = getDisplayWidth() / 2;
 
     // Display family name at top - use built-in font for info display
@@ -95,14 +132,17 @@ void M5DialDevice::displayFont(const String& familyName, const String& fontName,
     M5.Display.drawString(sizeStr, center_x - (M5.Display.textWidth(sizeStr) / 2), 45);
 
     // Set the actual font for sample text display using font pointer
-    if (fontPtr != nullptr) {
+    if (fontPtr != nullptr)
+    {
         M5.Display.setFont(fontPtr);
-    } else {
+    }
+    else
+    {
         M5.Display.setFont(&fonts::Font2); // Fallback font
     }
     M5.Display.setTextColor(WHITE);
     M5.Display.setTextDatum(middle_center);
-    
+
     // Display sample text with the current font
     int centerY = getDisplayHeight() / 2;
     drawWrappedText(sampleText, center_x, centerY);
@@ -125,31 +165,31 @@ void M5DialDevice::update()
     M5.update();
 }
 
-void M5DialDevice::showStartupMessage(const char* message)
+void M5DialDevice::showStartupMessage(const char *message)
 {
     clearDisplay();
-    
+
     // Main title using Yellowtail font, size 32
     M5.Display.setTextColor(GREEN);
     M5.Display.setTextDatum(middle_center);
     M5.Display.setTextSize(1);
     M5.Display.setFont(&fonts::Yellowtail_32);
     M5.Display.drawString(message, getDisplayWidth() / 2, getDisplayHeight() / 2 - 20);
-    
+
     // Instruction lines using Orbitron font (smaller size to fit in 240px width)
     M5.Display.setTextColor(WHITE);
     M5.Display.setTextDatum(middle_center);
     M5.Display.setTextSize(1);
     M5.Display.setFont(&fonts::Orbitron_Light_24);
-    
+
     // Calculate appropriate font size for instructions to fit width
     // Use a smaller built-in font for the instructions to ensure they fit
     M5.Display.setFont(&fonts::Font2);
-    
+
     // First instruction line
     M5.Display.drawString("Rotate dial to", getDisplayWidth() / 2, getDisplayHeight() / 2 + 25);
-    
-    // Second instruction line  
+
+    // Second instruction line
     M5.Display.drawString("scroll thru fonts", getDisplayWidth() / 2, getDisplayHeight() / 2 + 40);
 }
 

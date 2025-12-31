@@ -59,6 +59,9 @@ void loop()
 
         // Update font display based on encoder position
         fontManager.update(position);
+
+        // Print current font info when encoder changes
+        Serial.println(fontManager.getCurrentFamilyName() + " - " + fontManager.getCurrentFontName());
     }
 
     // Handle button press to change sample text
