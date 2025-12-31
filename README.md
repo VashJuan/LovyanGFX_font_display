@@ -2,7 +2,14 @@
 
 An open source, free program to display all LovyanGFX fonts on M5 Stack devices.
 
-![Example of LovyanGFX Font Display showing the DejaVu font](./imgs/DejaVu24.jpg "LovyanGFX Font Display showing the DejaVu font")
+<a href="./imgs/WelcomeScreen.png"><img src="./imgs/WelcomeScreen.png" alt="Welcome Screen" width="300"></a>
+
+_Welcome screen showing app title and version_
+
+<a href="./imgs/Roberto_Thin_24.png"><img src="./imgs/Roberto_Thin_24.png" alt="Font metrics display in v2.1" width="300"></a>
+
+_NEW in v2.1: Comprehensive font metrics display - Shows H(height), B(baseline),
+C(char width), A(ascender), D(descender), and TW(text width)_
 
 ## 📖 Description
 
@@ -35,7 +42,9 @@ When powered on, users on an M5Dial can:
       - The five boxing wizards jump quickly
       - Jackdaws love my big sphinx of quartz.
 
-![Example of LovyanGFX Font Display showing the FreeMono font](./imgs/FreeMono9.jpg "LovyanGFX Font Display showing the FreeMono font")
+<a href="./imgs/FreeMono9.jpg"><img src="./imgs/FreeMono9.jpg" alt="LovyanGFX Font Display showing the FreeMono font" width="300"></a>
+
+_Example: FreeMono 9pt monospace font_
 
 ## Source code repository
 
@@ -62,13 +71,27 @@ When powered on, users on an M5Dial can:
   - eFontCN family (Chinese) ⚠️ (excluded in default build)
   - eFontJA family (Japanese) ⚠️ (excluded in default build)
 
+<a href="./imgs/Satisfy_24.png"><img src="./imgs/Satisfy_24.png" alt="Satisfy decorative font example" width="300"></a>
+
+_Example: Satisfy 24pt decorative font_
+
 - **Interactive Controls**:
 
   - Rotate encoder to cycle through all the fonts
   - Press button to cycle through different sample strings of text
 
-- **Real-time Display**: Shows font family name, font name, size, and sample
-  text
+- **Font Metrics Display**: Shows detailed typographic information for each
+  font:
+
+  - **H (Height)**: Total font height in pixels
+  - **B (Baseline)**: Baseline offset from top
+  - **C (Char)**: Standard character width
+  - **A (Ascender)**: Height above baseline
+  - **D (Descender)**: Height below baseline
+  - **TW (Text Width)**: Width of current sample text
+
+- **Real-time Display**: Shows font family name, font name, size, metrics, and
+  sample text
 
 ## 🔧 Hardware Requirements
 
@@ -234,14 +257,55 @@ The included `LovyanGFX_M5Dial.code-workspace` provides:
 ## 🎮 Usage
 
 1. Power on the M5Dial
-2. The device will display "M5 Dial Font Display v2.0.1" on startup
+2. The device will display "M5 Dial Font Display v2.1.0" on startup
 3. Rotate the encoder to cycle through different fonts
 4. Press the button (at bottom of dial, embossed with "M5") to cycle through the
    sample texts
-5. Font information is displayed at the top of the screen
-6. Serial monitor shows additional limited debug information
+5. Font information is displayed at the top of the screen:
+   - Font family and name
+   - Font size
+   - **Font metrics**: H=height, B=baseline, C=char width, A=ascender,
+     D=descender, TW=text width
+6. Sample text is displayed using the selected font
+7. Serial monitor shows additional limited debug information
 
-![Example of LovyanGFX Font Display showing the FreeSerif24 font](./imgs/FreeSerif24.jpg "LovyanGFX Font Display showing the FreeSerif24 font")
+<a href="./imgs/FreeSerif24.jpg"><img src="./imgs/FreeSerif24.jpg" alt="LovyanGFX Font Display showing the FreeSerif24 font" width="300"></a>
+
+_Example: FreeSerif 24pt serif font_
+
+## 🖼️ Font Gallery
+
+Here are examples of various fonts available in the application:
+
+<table>
+<tr>
+<td align="center">
+<a href="./imgs/DejaVu9.png"><img src="./imgs/DejaVu9.png" alt="DejaVu 9pt font" width="200"></a><br>
+<em>DejaVu 9pt</em>
+</td>
+<td align="center">
+<a href="./imgs/FreeMonoBold9pt7b.png"><img src="./imgs/FreeMonoBold9pt7b.png" alt="FreeMono Bold 9pt" width="200"></a><br>
+<em>FreeMono Bold 9pt</em>
+</td>
+<td align="center">
+<a href="./imgs/FreeSans9pt7b.png"><img src="./imgs/FreeSans9pt7b.png" alt="FreeSans 9pt" width="200"></a><br>
+<em>FreeSans 9pt</em>
+</td>
+</tr>
+<tr>
+<td align="center">
+<a href="./imgs/DejaVu24.jpg"><img src="./imgs/DejaVu24.jpg" alt="DejaVu 24pt font" width="200"></a><br>
+<em>DejaVu 24pt</em>
+</td>
+<td align="center">
+<a href="./imgs/Orbitron_Light_24.png"><img src="./imgs/Orbitron_Light_24.png" alt="Orbitron Light 24pt" width="200"></a><br>
+<em>Orbitron Light 24pt</em>
+</td>
+<td align="center">
+<em>More font examples coming soon...</em>
+</td>
+</tr>
+</table>
 
 ## 📁 File Structure
 
@@ -408,7 +472,8 @@ with README updates.
 
 ## 📋 Versions
 
-**v2.0.1** - Minor updates and fixes (2025-12-30)
+**v2.1.0** - Add consistent versioning, update Welcome Screen, and add detailed
+font metrics. (2025-12-30)
 
 **v2.0** - Second release (2025-12-30)
 
@@ -430,15 +495,15 @@ This project is open source. Feel free to use, modify, and distribute.
 
 ### 🏷️ Version Management for Contributors
 
-- **No manual version updates** needed in source files
-- **Git tags control versions** - maintainers will tag releases
-- **Development versions** automatically show commit distance (e.g.,
-  `v2.0.1-5-g8abc123`)
+- **Version defined in platformio.ini** - check build flags for current version
+- **No manual source file updates** needed - version is injected at build time
 - **Test your changes** by building: `pio run --target upload`
+- **Version displays** in startup message and serial output
 
 ### 🔧 Development Guidelines
 
-- **Version Display**: Check startup message shows correct git-derived version
+- **Version Display**: Check startup message shows correct version from build
+  flags
 - **Code Style**: Follow existing formatting and commenting patterns
 - **Testing**: Verify encoder functionality and font display work correctly
 - **Documentation**: Update README.md if adding new features
@@ -448,8 +513,10 @@ This project is open source. Feel free to use, modify, and distribute.
 - 🎨 Add support for more M5Stack devices
 - 🌍 Add internationalization support
 - 🎵 Add sound feedback
-- 📊 Add font metrics display
+- ✅ ~~Add font metrics display~~ _(Completed!)_
 - 🎭 Add font preview animations
+- 📐 Add font comparison mode
+- 🎨 Add custom font loading support
 
 ---
 

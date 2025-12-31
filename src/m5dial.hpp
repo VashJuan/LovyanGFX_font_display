@@ -28,6 +28,7 @@ class M5DialDevice : public DeviceInterface
 private:
     void drawWrappedText(const char *text, int centerX, int centerY);
     int getStringWidth(const String &text);
+    void displayFontMetrics(const lgfx::IFont *fontPtr, const char *sampleText, int yPosition);
 
 public:
     /**
