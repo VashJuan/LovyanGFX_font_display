@@ -5,7 +5,7 @@
  * @brief Display all LovyanGFX fonts, (on M5Dial) using an encoder to scroll through them.
   This is a demo program for M5Dial to show the various fonts available in LovyanGFX.
   Use the encoder to scroll through the fonts displayed on the screen.
- * @version 1.1.0
+ * @version 2.0.0
  * @date 2025-12-15
  *
  * @Hardwares: M5Dial

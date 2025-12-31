@@ -1,7 +1,7 @@
 /**
  * @file fontmanager.hpp
  * @brief Font Display Manager Header
- * @version 1.0
+ * @version 2.0.0
  * @date 2025-12-16
  *
  * @Hardwares: M5Dial

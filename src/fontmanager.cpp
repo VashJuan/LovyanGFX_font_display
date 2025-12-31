@@ -1,7 +1,7 @@
 /**
  * @file fontmanager.cpp
  * @brief Font Display Manager Implementation
- * @version 1.0
+ * @version 2.0.0
  * @date 2025-12-16
  *
  * @Hardwares: M5Dial
@@ -12,7 +12,7 @@
  */
 
 #include "fontmanager.hpp"
-#include <M5Unified.h>  // For font definitions
+#include <M5Unified.h> // For font definitions
 
 // Define font families with font pointers for easy iteration
 const FontInfo fontFamilies[][20] = {
@@ -161,23 +161,22 @@ const FontInfo fontFamilies[][20] = {
         {nullptr, nullptr, 0, nullptr} // End marker
     }
 #endif // !ENGLISH_FONTS_ONLY
-    
+
 };
 
 const int NUM_FONT_FAMILIES = sizeof(fontFamilies) / sizeof(fontFamilies[0]);
 
 // Constructor implementation
-FontDisplayManager::FontDisplayManager(DeviceInterface* deviceInterface) : 
-    currentFamilyIndex(0), 
-    currentFontIndex(0), 
-    lastEncoderPosition(-999), 
-    sampleText("Sample Text 123"),
-    displayChanged(true),
-    device(deviceInterface)
+FontDisplayManager::FontDisplayManager(DeviceInterface *deviceInterface) : currentFamilyIndex(0),
+                                                                           currentFontIndex(0),
+                                                                           lastEncoderPosition(-999),
+                                                                           sampleText("Sample Text 123"),
+                                                                           displayChanged(true),
+                                                                           device(deviceInterface)
 {
 }
 
-void FontDisplayManager::setDevice(DeviceInterface* deviceInterface)
+void FontDisplayManager::setDevice(DeviceInterface *deviceInterface)
 {
     device = deviceInterface;
     displayChanged = true;
@@ -186,12 +185,14 @@ void FontDisplayManager::setDevice(DeviceInterface* deviceInterface)
 // Private method implementations
 int FontDisplayManager::getFontsInFamily(int familyIndex) const
 {
-    if (familyIndex < 0 || familyIndex >= NUM_FONT_FAMILIES) {
+    if (familyIndex < 0 || familyIndex >= NUM_FONT_FAMILIES)
+    {
         return 0;
     }
-    
+
     int count = 0;
-    while (fontFamilies[familyIndex][count].family != nullptr) {
+    while (fontFamilies[familyIndex][count].family != nullptr)
+    {
         count++;
     }
     return count;
@@ -199,11 +200,13 @@ int FontDisplayManager::getFontsInFamily(int familyIndex) const
 
 String FontDisplayManager::getFamilyName(int familyIndex) const
 {
-    if (familyIndex < 0 || familyIndex >= NUM_FONT_FAMILIES) {
+    if (familyIndex < 0 || familyIndex >= NUM_FONT_FAMILIES)
+    {
         return "Unknown";
     }
 
-    if (fontFamilies[familyIndex][0].family != nullptr) {
+    if (fontFamilies[familyIndex][0].family != nullptr)
+    {
         return String(fontFamilies[familyIndex][0].family);
     }
     return "Empty Family";
@@ -211,12 +214,14 @@ String FontDisplayManager::getFamilyName(int familyIndex) const
 
 String FontDisplayManager::getFontName(int familyIndex, int fontIndex) const
 {
-    if (familyIndex < 0 || familyIndex >= NUM_FONT_FAMILIES) {
+    if (familyIndex < 0 || familyIndex >= NUM_FONT_FAMILIES)
+    {
         return "Invalid Family";
     }
-    
+
     int fontsInFamily = getFontsInFamily(familyIndex);
-    if (fontIndex < 0 || fontIndex >= fontsInFamily) {
+    if (fontIndex < 0 || fontIndex >= fontsInFamily)
+    {
         return "Invalid Font";
     }
 
@@ -227,11 +232,13 @@ void FontDisplayManager::mapEncoderToFont(long encoderPosition)
 {
     // Calculate total number of fonts across all families
     int totalFonts = 0;
-    for (int i = 0; i < NUM_FONT_FAMILIES; i++) {
+    for (int i = 0; i < NUM_FONT_FAMILIES; i++)
+    {
         totalFonts += getFontsInFamily(i);
     }
 
-    if (totalFonts == 0) {
+    if (totalFonts == 0)
+    {
         currentFamilyIndex = 0;
         currentFontIndex = 0;
         return;
@@ -239,12 +246,14 @@ void FontDisplayManager::mapEncoderToFont(long encoderPosition)
 
     // Ensure position is positive and wrap around
     long positivePosition = ((encoderPosition % totalFonts) + totalFonts) % totalFonts;
-    
+
     // Find which family and font index this position corresponds to
     int currentPos = 0;
-    for (int familyIdx = 0; familyIdx < NUM_FONT_FAMILIES; familyIdx++) {
+    for (int familyIdx = 0; familyIdx < NUM_FONT_FAMILIES; familyIdx++)
+    {
         int fontsInThisFamily = getFontsInFamily(familyIdx);
-        if (positivePosition < currentPos + fontsInThisFamily) {
+        if (positivePosition < currentPos + fontsInThisFamily)
+        {
             currentFamilyIndex = familyIdx;
             currentFontIndex = positivePosition - currentPos;
             return;
@@ -258,7 +267,7 @@ void FontDisplayManager::mapEncoderToFont(long encoderPosition)
 }
 
 // Public method implementations
-void FontDisplayManager::setSampleText(const char* text)
+void FontDisplayManager::setSampleText(const char *text)
 {
     sampleText = text;
     displayChanged = true;
@@ -267,14 +276,16 @@ void FontDisplayManager::setSampleText(const char* text)
 void FontDisplayManager::update(long encoderPosition)
 {
     // Check if encoder position has changed
-    if (encoderPosition != lastEncoderPosition) {
+    if (encoderPosition != lastEncoderPosition)
+    {
         mapEncoderToFont(encoderPosition);
         lastEncoderPosition = encoderPosition;
         displayChanged = true;
     }
 
     // Update display if needed
-    if (displayChanged) {
+    if (displayChanged)
+    {
         displayCurrentFont();
         displayChanged = false;
     }
@@ -282,18 +293,18 @@ void FontDisplayManager::update(long encoderPosition)
 
 void FontDisplayManager::displayCurrentFont()
 {
-    if (device == nullptr) {
+    if (device == nullptr)
+    {
         return; // Cannot display without a device
     }
-    
+
     String familyName = getFamilyName(currentFamilyIndex);
     String fontName = getFontName(currentFamilyIndex, currentFontIndex);
     int fontSize = getCurrentFontSize();
-    const lgfx::IFont* fontPtr = getCurrentFontPtr();
-    
+    const lgfx::IFont *fontPtr = getCurrentFontPtr();
+
     device->displayFont(familyName, fontName, fontSize, fontPtr, sampleText);
 }
-
 
 String FontDisplayManager::getCurrentFamilyName() const
 {
@@ -310,7 +321,6 @@ int FontDisplayManager::getTotalFamilies() const
     return NUM_FONT_FAMILIES;
 }
 
-
 void FontDisplayManager::forceUpdate()
 {
     displayChanged = true;
@@ -319,16 +329,18 @@ void FontDisplayManager::forceUpdate()
 int FontDisplayManager::getCurrentFontSize() const
 {
     if (currentFamilyIndex >= 0 && currentFamilyIndex < NUM_FONT_FAMILIES &&
-        currentFontIndex >= 0 && currentFontIndex < getFontsInFamily(currentFamilyIndex)) {
+        currentFontIndex >= 0 && currentFontIndex < getFontsInFamily(currentFamilyIndex))
+    {
         return fontFamilies[currentFamilyIndex][currentFontIndex].size;
     }
     return 0;
 }
 
-const lgfx::IFont* FontDisplayManager::getCurrentFontPtr() const
+const lgfx::IFont *FontDisplayManager::getCurrentFontPtr() const
 {
     if (currentFamilyIndex >= 0 && currentFamilyIndex < NUM_FONT_FAMILIES &&
-        currentFontIndex >= 0 && currentFontIndex < getFontsInFamily(currentFamilyIndex)) {
+        currentFontIndex >= 0 && currentFontIndex < getFontsInFamily(currentFamilyIndex))
+    {
         return fontFamilies[currentFamilyIndex][currentFontIndex].fontPtr;
     }
     return nullptr;
