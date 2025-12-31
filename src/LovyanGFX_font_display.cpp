@@ -23,47 +23,29 @@
 
 void setup()
 {
-    // Initialize serial FIRST, before M5 initialization (matches thermo project)
     Serial.begin(115200);
-    
-    // Initialize M5Dial device (this will call M5.begin internally)
-    m5DialDevice.begin();
-    
-    delay(1000); // Give time for initialization
-    
-    // Send initial serial output to verify connection
-    Serial.println();
-    Serial.println("=== M5 Dial Font Display v1.1.0 Starting ===");
-    Serial.println("Serial monitor connected successfully!");
-    Serial.println("ESP32-S3 USB/Serial Debug Test");
-    Serial.flush(); // Ensure output is sent
-    
-    // Show something on the display to confirm code is running
-    m5DialDevice.showStartupMessage("Serial Test - Check Monitor");
-    delay(2000);
-    
-    // Initialize M5Dial device (already done above with M5.begin())
-    Serial.println("M5 device initialized.");
-    
-    // Test display output with new styled startup screen
-    m5DialDevice.showStartupMessage("Font Display");
-    delay(2500);  // Show splash screen longer to appreciate the styling
 
-    Serial.println("Setting up encoder...");
+    // Initialize M5Dial device
+    m5DialDevice.begin();
+
+    delay(1000);
+
+    Serial.println();
+    Serial.println("=== M5 Dial Font Display v1.1.0 ===");
+
+    // Show startup screen
+    m5DialDevice.showStartupMessage("Font Display");
+    delay(2500);
+
+    // Setup encoder
     encoder.setup();
-    Serial.println("Encoder setup complete.");
 
     // Initialize font manager with device interface and sample text
-    Serial.println("Initializing font manager...");
     fontManager.setDevice(&m5DialDevice);
     fontManager.setSampleText("Hello World!");
-    Serial.println("Font manager initialized.");
 
-    Serial.println("Setup complete!");
-    Serial.println("Total font families: " + String(fontManager.getTotalFamilies()));
-    Serial.println("Use encoder to scroll through fonts, press button to change sample text.");
+    Serial.println("Setup complete! Total fonts: " + String(fontManager.getTotalFamilies()));
     Serial.println("=== Ready ===");
-    Serial.flush();
 }
 
 void loop()
@@ -74,16 +56,9 @@ void loop()
     if (encoder.hasPositionChanged())
     {
         long position = encoder.getPosition();
-        Serial.println("Encoder position: " + String(position));
 
         // Update font display based on encoder position
         fontManager.update(position);
-
-        // Print current font info to serial
-        Serial.println("Family: " + fontManager.getCurrentFamilyName());
-        Serial.println("Font: " + fontManager.getCurrentFontName());
-        Serial.println("Size: " + String(fontManager.getCurrentFontSize()));
-        Serial.println("---");
     }
 
     // Handle button press to change sample text
@@ -110,6 +85,6 @@ void loop()
         fontManager.setSampleText(sampleTexts[textIndex]);
         fontManager.forceUpdate();
 
-        Serial.println("Sample text changed to: " + String(sampleTexts[textIndex]));
+        Serial.println("Text: " + String(sampleTexts[textIndex]));
     }
 }
