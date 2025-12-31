@@ -128,11 +128,29 @@ void M5DialDevice::update()
 void M5DialDevice::showStartupMessage(const char* message)
 {
     clearDisplay();
+    
+    // Main title using Yellowtail font, size 32
     M5.Display.setTextColor(GREEN);
     M5.Display.setTextDatum(middle_center);
     M5.Display.setTextSize(1);
+    M5.Display.setFont(&fonts::Yellowtail_32);
+    M5.Display.drawString(message, getDisplayWidth() / 2, getDisplayHeight() / 2 - 20);
+    
+    // Instruction lines using Orbitron font (smaller size to fit in 240px width)
+    M5.Display.setTextColor(WHITE);
+    M5.Display.setTextDatum(middle_center);
+    M5.Display.setTextSize(1);
+    M5.Display.setFont(&fonts::Orbitron_Light_24);
+    
+    // Calculate appropriate font size for instructions to fit width
+    // Use a smaller built-in font for the instructions to ensure they fit
     M5.Display.setFont(&fonts::Font2);
-    M5.Display.drawString(message, getDisplayWidth() / 2, getDisplayHeight() / 2 + 15);
+    
+    // First instruction line
+    M5.Display.drawString("Rotate dial to", getDisplayWidth() / 2, getDisplayHeight() / 2 + 25);
+    
+    // Second instruction line  
+    M5.Display.drawString("scroll thru fonts", getDisplayWidth() / 2, getDisplayHeight() / 2 + 40);
 }
 
 // Global instance for easy access

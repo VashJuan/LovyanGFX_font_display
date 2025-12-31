@@ -45,9 +45,9 @@ void setup()
     // Initialize M5Dial device (already done above with M5.begin())
     Serial.println("M5 device initialized.");
     
-    // Test display output
-    m5DialDevice.showStartupMessage("M5 Dial Font Display v 1.1.0");
-    delay(750);
+    // Test display output with new styled startup screen
+    m5DialDevice.showStartupMessage("Font Display");
+    delay(2500);  // Show splash screen longer to appreciate the styling
 
     Serial.println("Setting up encoder...");
     encoder.setup();
