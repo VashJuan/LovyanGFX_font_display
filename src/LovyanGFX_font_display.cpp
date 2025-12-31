@@ -5,7 +5,7 @@
  * @brief Display all LovyanGFX fonts, (on M5Dial) using an encoder to scroll through them.
   This is a demo program for M5Dial to show the various fonts available in LovyanGFX.
   Use the encoder to scroll through the fonts displayed on the screen.
- * @version 1.0
+ * @version 1.1.0
  * @date 2025-12-15
  *
  * @Hardwares: M5Dial
@@ -23,22 +23,47 @@
 
 void setup()
 {
+    // Initialize serial FIRST, before M5 initialization (matches thermo project)
     Serial.begin(115200);
-    Serial.println("Font Display starting...");
-
-    // Initialize M5Dial device
+    
+    // Initialize M5Dial device (this will call M5.begin internally)
     m5DialDevice.begin();
-    m5DialDevice.showStartupMessage("M5 Dial Font Display v 1.0");
+    
+    delay(1000); // Give time for initialization
+    
+    // Send initial serial output to verify connection
+    Serial.println();
+    Serial.println("=== M5 Dial Font Display v1.1.0 Starting ===");
+    Serial.println("Serial monitor connected successfully!");
+    Serial.println("ESP32-S3 USB/Serial Debug Test");
+    Serial.flush(); // Ensure output is sent
+    
+    // Show something on the display to confirm code is running
+    m5DialDevice.showStartupMessage("Serial Test - Check Monitor");
+    delay(2000);
+    
+    // Initialize M5Dial device (already done above with M5.begin())
+    Serial.println("M5 device initialized.");
+    
+    // Test display output
+    m5DialDevice.showStartupMessage("M5 Dial Font Display v 1.1.0");
     delay(750);
 
+    Serial.println("Setting up encoder...");
     encoder.setup();
+    Serial.println("Encoder setup complete.");
 
     // Initialize font manager with device interface and sample text
+    Serial.println("Initializing font manager...");
     fontManager.setDevice(&m5DialDevice);
     fontManager.setSampleText("Hello World!");
+    Serial.println("Font manager initialized.");
 
-    Serial.println("Setup done.");
+    Serial.println("Setup complete!");
     Serial.println("Total font families: " + String(fontManager.getTotalFamilies()));
+    Serial.println("Use encoder to scroll through fonts, press button to change sample text.");
+    Serial.println("=== Ready ===");
+    Serial.flush();
 }
 
 void loop()

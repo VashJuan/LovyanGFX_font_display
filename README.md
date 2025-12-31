@@ -45,16 +45,22 @@ When powered on, users on an M5Dial can:
 
 - **Font Family Navigation**: Cycle through multiple font families including:
 
+  **Default English-Only Build** (7 font families):
+
   - Built-in LGFX fonts
   - Free Mono family
   - Free Sans family
   - Free Serif family
   - Decorative fonts (Orbitron, Roboto, Satisfy, Yellowtail)
   - DejaVu family
-  - Japanese Mincho family (commented out to save memory space)
-  - Japanese Gothic family (commented out to save memory space)
-  - eFontCN family (Chinese) (commented out to save memory space)
-  - eFontJA family (Japanese) (commented out to save memory space)
+
+  **Full Build** (11 font families - requires external flash):
+
+  - All English fonts (above)
+  - Japanese Mincho family ⚠️ (excluded in default build)
+  - Japanese Gothic family ⚠️ (excluded in default build)
+  - eFontCN family (Chinese) ⚠️ (excluded in default build)
+  - eFontJA family (Japanese) ⚠️ (excluded in default build)
 
 - **Interactive Controls**:
 
@@ -74,7 +80,44 @@ When powered on, users on an M5Dial can:
 - **M5GFX**: <https://github.com/m5stack/M5GFX>
 - **M5Unified**: <https://github.com/m5stack/M5Unified>
 
-## 🚀 Installation
+## � Build Configurations
+
+This project supports two build configurations to manage memory usage:
+
+### 📦 English-Only Build (Default)
+
+- **Environment**: `m5stack-stamps3-en`
+- **Default configuration** optimized for memory efficiency
+- **Flash Usage**: ~730KB (21.8% of available 3.3MB)
+- **Includes**: English fonts, decorative fonts (Orbitron, Roboto, etc.)
+- **Excludes**: East Asian fonts (Japanese, Chinese, Korean) to prevent memory
+  overflow
+
+### 🌍 Full Font Build
+
+- **Environment**: `m5stack-stamps3-full`
+- **Includes**: All fonts including East Asian character sets
+- **Flash Usage**: ~7.7MB (exceeds available 3.3MB flash memory)
+- **Status**: ⚠️ **Cannot be used** - requires external flash storage or custom
+  partition scheme
+
+### 🏗️ Building Specific Configurations
+
+```bash
+# Build English-only version (default)
+pio run -e m5stack-stamps3-en
+
+# Build full version (will fail due to memory constraints)
+pio run -e m5stack-stamps3-full
+
+# Upload English-only version
+pio run -e m5stack-stamps3-en --target upload
+```
+
+The English-only build is automatically selected as the default to ensure the
+application works out-of-the-box without memory issues.
+
+## �🚀 Installation
 
 ### Option 1: VSCode with PlatformIO (Recommended) 🎯
 
@@ -117,8 +160,11 @@ The easiest way to get started is using the pre-configured VSCode workspace:
 
 3.  **Build and upload**:
 
-        # Using PlatformIO CLI
+        # Using PlatformIO CLI (builds English-only version by default)
         pio run --target upload
+
+        # Explicitly build English-only version
+        pio run -e m5stack-stamps3-en --target upload
 
         # Or using PlatformIO IDE
         # Open the project folder and click the upload button

@@ -21,6 +21,7 @@ lib_deps/
 build/
 .build/
 .git/
+thermo/
 
 # OS generated files
 .DS_Store

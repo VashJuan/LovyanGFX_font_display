@@ -110,7 +110,9 @@ const FontInfo fontFamilies[][20] = {
         {"DejaVu", "DejaVu72", 72, &fonts::DejaVu72},
         {nullptr, nullptr, 0, nullptr} // End marker
     }
-    /** remove these to save memory space!
+#ifndef ENGLISH_FONTS_ONLY
+    // East Asian fonts - these are VERY large (several MB each)
+    // Only include when building with ALL_FONTS=1 or sufficient flash space
     ,
     // Japanese Mincho family
     {
@@ -125,7 +127,7 @@ const FontInfo fontFamilies[][20] = {
         {"JapanMincho", "lgfxJapanMinchoP_20", 20, &fonts::lgfxJapanMinchoP_20},
         {"JapanMincho", "lgfxJapanMinchoP_24", 24, &fonts::lgfxJapanMinchoP_24},
         {nullptr, nullptr, 0, nullptr} // End marker
-    }
+    },
     // Japanese Gothic family
     {
         {"JapanGothic", "lgfxJapanGothic_8", 8, &fonts::lgfxJapanGothic_8},
@@ -158,7 +160,8 @@ const FontInfo fontFamilies[][20] = {
         {"eFontJA", "efontJA_24", 24, &fonts::efontJA_24},
         {nullptr, nullptr, 0, nullptr} // End marker
     }
-    */
+#endif // !ENGLISH_FONTS_ONLY
+    
 };
 
 const int NUM_FONT_FAMILIES = sizeof(fontFamilies) / sizeof(fontFamilies[0]);
